@@ -1,0 +1,57 @@
+body{
+    font-family: 'Nunito', sans-serif;
+}
+
+.btn{
+    border-radius: 1.25rem;
+    height: 4.375rem;
+    
+}
+.btn-primary{
+    color: #F9F9F9;
+    background-color: #9FCB56;
+    border: none;
+    height: 4.375rem;
+    font-size: 1.5em;
+    font-weight: 900;
+    box-shadow: 0px 6px 10px rgba(159, 203, 86, 0.2)
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary:active:focus{
+    background-color: #248D3B;
+    box-shadow: 0px 6px 10px rgba(159, 203, 86, 0.2);
+    border:none;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  background-color: #248D3B;
+}
+
+.btn-outline-primary{
+    color: #9FCB56;
+    border: 2px solid #9FCB56;
+    height: 4.375rem;
+    font-size: 1.5em;
+    font-weight: 900;
+}
+
+.btn-outline-primary:hover{
+    color: #F9F9F9;
+    background-color: #248D3B;
+    border: 2px solid #248D3B;
+    box-shadow: 0px 6px 10px rgba(159, 203, 86, 0.2)
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active,
+.show > .btn-outline-primary.dropdown-toggle {
+    background-color: #248D3B;
+}
+
+.form-control{
+    background-color: #262626;
+    border: none;
+    border-radius: .625em;
+    height: 2.75em;
+    font-size: 1.5em;
+}
