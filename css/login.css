@@ -15,12 +15,10 @@ body {
     border-radius: 20px;
     align-self: center;
     display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #login{
-    width: 17.875em;
+    width: 17.8125em;
 }
 
 input{
@@ -30,7 +28,7 @@ input{
 h1{
     color: #F9F9F9;
     font-weight: 900;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1rem;
     font-size: 4.5em;
 }
 
