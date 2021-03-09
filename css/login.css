@@ -35,3 +35,7 @@ h1{
 input{
     margin-bottom: 1.875rem;
 }
+
+span{
+    width: 100%;
+}

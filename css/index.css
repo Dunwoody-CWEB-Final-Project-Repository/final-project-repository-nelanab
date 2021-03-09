@@ -1,0 +1,46 @@
+body{
+    width: 100vw;
+    height: 100vh;
+    font-size: .833333vw;
+    background-color: #1D1D1D;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+    padding-left: 1.875em;
+    padding-right: 1.875em;
+    position: relative;
+    display: grid;
+    color: #F9F9F9;
+}
+
+#container{
+    height: 100vh;
+    grid-column: 2 / 13;
+    margin-right: -1.875em;
+}
+
+h3{
+    font-size: 1.5em;
+}
+
+#postContainer{
+    height: 88.89vh;
+    background-color: #262626;
+    border-radius: 10px;
+}
+
+#pageTitle{
+    margin-top: 48px;
+}
+
+span{
+    position: absolute;
+    top: 20px;
+    right: 1.875rem;
+    height: 5.5vh;
+    background-color: transparent;
+    border: 2px solid #9FCB56;
+    border-radius: 10px;
+    width: 23vw;
+    font-size: 24px;
+    color: #F9F9F9;
+}

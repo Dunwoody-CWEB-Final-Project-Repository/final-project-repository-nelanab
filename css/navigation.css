@@ -1,0 +1,78 @@
+body{
+    font-size: .83333vw;
+}
+
+#sidenav{
+    width: 29.5625em;
+    left: -19.75em;
+    background-color: #262626;
+    height: 100%;
+    position: absolute;
+    border-radius: 0 20px 20px 0;
+    transition: all .3s ease-in-out;
+}
+
+#sidenav:hover{
+    left: 0;
+}
+
+#sidenav .navLink{
+    position: relative;
+    margin-left: 1.875rem;
+    opacity: 0;
+    transition: all .3s ease-in-out;
+    width: 0;
+    overflow:hidden;
+}
+
+#sidenav:hover .navLink{
+    opacity: 100%;
+    width: auto;
+}
+
+.navLink:hover{
+    color: #9FCB56;
+}
+
+#sidenav img{
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 10px;
+}
+
+#sidenav svg{
+    width: 4.5rem;
+    height: 4.5rem;
+}
+
+#sidenav a{
+    display: flex;
+    position: fixed;
+    left: 1.875rem;
+    align-items: center;
+    color: #F9F9F9;
+    overflow: hidden;
+    height: 4.5rem;
+    font-size: 2.25rem;
+}
+
+#home{
+    top: 28px;
+}
+
+#profile{
+    top: 142px;
+}
+
+#createPost{
+    top: 256px;
+}
+
+#settings{
+    top: 370px;
+}
+
+h1{
+    font-weight: 900;
+}
+

@@ -5,6 +5,8 @@ body{
 .btn{
     border-radius: 1.25rem;
     height: 4.375rem;
+    font-size: 1.5em;
+    font-weight: 900;
     
 }
 .btn-primary{
@@ -12,8 +14,6 @@ body{
     background-color: #9FCB56;
     border: none;
     height: 4.375rem;
-    font-size: 1.5em;
-    font-weight: 900;
     box-shadow: 0px 6px 10px rgba(159, 203, 86, 0.2)
 }
 
@@ -48,8 +48,6 @@ body{
     color: #9FCB56;
     border: 2px solid #9FCB56;
     height: 4.375rem;
-    font-size: 1.5em;
-    font-weight: 900;
 }
 
 .btn-outline-primary:hover{
@@ -81,6 +79,8 @@ body{
     border-color: #F9F9F9;
     border: 2px solid;
     transition: border .15s;
+    font-size: 1.5em;
+    font-weight: 900;
   }
   
   .btn-outline-secondary:hover {
@@ -159,4 +159,29 @@ a{
 
 a:hover{
     text-decoration: none;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
+}
+
+label{
+  margin-bottom: 1.875rem !important;
+  width: 100%;
 }
