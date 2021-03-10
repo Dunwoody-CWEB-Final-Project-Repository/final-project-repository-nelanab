@@ -1,19 +1,19 @@
 body{
     width: 100vw;
     height: 100vh;
-    font-size: .833333vw;
+    font-size: 1.481481vw;
     background-color: #1D1D1D;
     grid-template-columns: repeat(12, 1fr);
     gap: 20px;
-    padding-left: 1.875em;
-    padding-right: 1.875em;
+    padding-left: 1.875rem;
+    padding-right: 1.875rem;
     position: relative;
     display: grid;
     color: #F9F9F9;
 }
 
 ::-webkit-scrollbar {
-    width: 1.25em;
+    width: 1.25rem;
     background-color: #1D1D1D;
     border: 2px solid #262626;
     border-radius: 10px;
@@ -32,21 +32,20 @@ body{
     height: 100vh;
     grid-column: 2 / span 12;
     position: relative;
-    z-index: -1;
 }
 
 h3, p{
-    font-size: 1.5em;
+    font-size: 1.5rem;
 }
 
 #postContainer{
     height: 86.296vh;
     background-color: #262626;
     border-radius: 10px;
-    padding: 1.875em;
+    padding: 1.875rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.875em;
+    gap: 1.875rem;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -62,7 +61,7 @@ h3, p{
     border: 2px solid #9FCB56;
     border-radius: 10px;
     width: 23vw;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     color: #F9F9F9;
     grid-column-end: 12;
 }
@@ -76,7 +75,7 @@ h3, p{
 }
 
 .card{
-    height: 35.375em;
+    height: 35.375rem;
     color: #F9F9F9;
     position: relative;
     border-radius: 10px !important;
@@ -98,12 +97,12 @@ h3, p{
 .card-title{
     height: auto;
     margin-bottom: 0;
-    font-size: 2.25em;
+    font-size: 2.25rem;
     font-weight: 700;
 }
 
 .card-block{
-    padding: 1.875em !important;
+    padding: 1.875rem !important;
     flex-wrap: wrap;
     height: 100%;
     width: 47%;
