@@ -1,3 +1,9 @@
+<?php 
+    include 'config/database.php';
+
+    include 'config/core.php';
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,12 +21,53 @@
         ?>
         <div id="container">
             <h3 id="pageTitle">Home</h3>
-            <span class="btn btn-outline-primary">
-                <input type='search' placeholder="search"/>
-            </span>
-            
-            <div id="postContainer">
+            <form role="search" action="search.php" id="searchForm">
+                <div class="input-group">
+                    <input type="text" class="search form-control" placeholder="search" name="s" id="search-term" required <?php echo isset($search_term) ? "value='$search_term'":""; ?> />
+                </div>
+            </form>
 
+            <div id="postContainer">
+            <div class="card d-flex-row flex-wrap">
+                <div class="card-header" style="background-image: url('img/profile.png'); background-size: cover; background-position: center;">
+                    <div class='card-image' style="background-image: url('img/profile.png'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                    </div>
+                <div class="card-block d-flex">
+                    <h2 class="card-title">Title</h2>
+                    <p class="card-text">Description</p>
+                    <div class='card-user align-self-end d-flex align-items-center'>
+                        <img src='img/profile.png'/>
+                        <h3 class="card-username">username</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card d-flex-row flex-wrap">
+                <div class="card-header border-0">
+                    <img src="//placehold.it/200" alt="">
+                </div>
+                <div class="card-block px-2 d-flex">
+                    <h2 class="card-title">Title</h2>
+                    <p class="card-text">Description</p>
+                    <div class='card-user align-self-end d-flex align-items-center'>
+                        <img src='img/profile.png'/>
+                        <h3 class="card-username">username</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card d-flex-row flex-wrap">
+                <div class="card-header border-0">
+                    <img src="//placehold.it/200" alt="">
+                </div>
+                <div class="card-block px-2 d-flex">
+                    <h2 class="card-title">Title</h2>
+                    <p class="card-text">Description</p>
+                    <div class='card-user align-self-end d-flex align-items-center'>
+                        <img src='img/profile.png'/>
+                        <h3 class="card-username">username</h3>
+                    </div>
+                </div>
             </div>
         </div>
 

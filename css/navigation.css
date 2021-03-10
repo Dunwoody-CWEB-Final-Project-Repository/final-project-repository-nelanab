@@ -1,7 +1,3 @@
-body{
-    font-size: .83333vw;
-}
-
 #sidenav{
     width: 29.5625em;
     left: -19.75em;
@@ -10,6 +6,7 @@ body{
     position: absolute;
     border-radius: 0 20px 20px 0;
     transition: all .3s ease-in-out;
+    z-index: 99 !important;
 }
 
 #sidenav:hover{
@@ -34,9 +31,9 @@ body{
     color: #9FCB56;
 }
 
-#sidenav img{
-    width: 4.5rem;
-    height: 4.5rem;
+.image{
+    width: 4.5rem !important;
+    height: 4.5rem !important;
     border-radius: 10px;
 }
 
@@ -53,7 +50,7 @@ body{
     color: #F9F9F9;
     overflow: hidden;
     height: 4.5rem;
-    font-size: 2.25rem;
+    font-size: 225%;
 }
 
 #home{

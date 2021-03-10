@@ -12,35 +12,126 @@ body{
     color: #F9F9F9;
 }
 
+::-webkit-scrollbar {
+    width: 1.25em;
+    background-color: #1D1D1D;
+    border: 2px solid #262626;
+    border-radius: 10px;
+  }
+   
+  ::-webkit-scrollbar-track {
+    box-shadow: none;
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background-color: #9FCB56;
+    border-radius: 10px;
+  }
+
 #container{
     height: 100vh;
-    grid-column: 2 / 13;
-    margin-right: -1.875em;
+    grid-column: 2 / span 12;
+    position: relative;
+    z-index: -1;
 }
 
-h3{
+h3, p{
     font-size: 1.5em;
 }
 
 #postContainer{
-    height: 88.89vh;
+    height: 86.296vh;
     background-color: #262626;
     border-radius: 10px;
+    padding: 1.875em;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.875em;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #pageTitle{
     margin-top: 48px;
+    grid-column-start: 2;
 }
 
-span{
-    position: absolute;
-    top: 20px;
-    right: 1.875rem;
+.search{
     height: 5.5vh;
     background-color: transparent;
     border: 2px solid #9FCB56;
     border-radius: 10px;
     width: 23vw;
-    font-size: 24px;
+    font-size: 1.5em;
     color: #F9F9F9;
+    grid-column-end: 12;
 }
+
+#searchForm{
+    position: absolute;
+    top: 20px;
+    right: 1.875rem;
+    height: auto;
+    margin-right: -20px;
+}
+
+.card{
+    height: 35.375em;
+    color: #F9F9F9;
+    position: relative;
+    border-radius: 10px !important;
+    z-index: 1 !important;
+    background-color: #1D1D1D;
+}
+
+.card-header{
+    width: 53%;
+    height: 100%;
+    padding: 0;
+    border-radius: 10px !important;
+}
+
+.card-title, .card-text{
+    width: 100%;
+}
+
+.card-title{
+    height: auto;
+    margin-bottom: 0;
+    font-size: 2.25em;
+    font-weight: 700;
+}
+
+.card-block{
+    padding: 1.875em !important;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 47%;
+}
+
+.card-text{
+    height: 50%;
+}
+
+.card-user{
+    height: 4.5rem;
+    align-items: center;
+}
+
+.card-username{
+    margin-left: 1.875rem;
+}
+
+.card-block img{
+    height: 4.5rem;
+    width: 4.5rem;
+    border-radius: 10px;
+}
+
+.card-image{
+    height: 100%;
+    backdrop-filter: blur(50px);
+    border-radius: 10px !important;
+}
+
+
