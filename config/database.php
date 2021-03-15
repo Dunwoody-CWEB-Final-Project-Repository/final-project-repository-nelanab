@@ -7,7 +7,7 @@ $password="";
 
 try
 {
-	$con = new PDO("mysql:host={$host};dbname={$db_name}",$username,$password);
+	$db = new PDO("mysql:host={$host};dbname={$db_name}",$username,$password);
 }
 
 // catch error

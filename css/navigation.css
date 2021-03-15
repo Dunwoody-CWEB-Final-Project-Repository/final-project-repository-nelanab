@@ -1,6 +1,6 @@
 #sidenav{
-    width: 29.5625em;
-    left: -19.75em;
+    width: 24.635417vw;
+    left: -16.354167vw;
     background-color: #262626;
     height: 100%;
     position: absolute;
@@ -27,8 +27,8 @@
     width: auto;
 }
 
-.navLink:hover{
-    color: #9FCB56;
+#sidenav a:hover{
+    color: #9FCB56 !important;
 }
 
 a img{
@@ -48,24 +48,24 @@ a img{
 }
 
 #sidenav h2, #sidenav h1{
-    font-size: 2.25em !important;
+    font-size: 3.33333vh !important;
     margin-bottom: 0;
 }
 
 #home{
-    top: 1.75em;
+    top: 2.59vh;
 }
 
 #profile{
-    top: 8.875em;
+    top: 13.148148vh;
 }
 
 #createPost{
-    top: 16em;
+    top: 23.703704vh;
 }
 
 #settings{
-    top: 23.125em;
+    top: 34.259259vh;
 }
 
 h1{

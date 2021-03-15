@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="css/overrides.css" />
         <link rel="stylesheet" href="css/index.css" />
         <link rel="stylesheet" href="css/navigation.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;800;900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     </head>
     
     <body>
@@ -28,44 +28,46 @@
             </form>
 
             <div id="postContainer">
-            <div class="card d-flex-row flex-wrap">
-                <div class="card-header" style="background-image: url('img/profile.png'); background-size: cover; background-position: center;">
-                    <div class='card-image' style="background-image: url('img/profile.png'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                <div class="card d-flex-row flex-wrap">
+                    <div class="card-header" style="background-image: url('img/flyingcandy.png'); background-size: cover; background-position: center;">
+                        <div class='card-image' style="background-image: url('img/flyingcandy.png'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
                     </div>
-                <div class="card-block d-flex">
-                    <h2 class="card-title">Title</h2>
-                    <p class="card-text">Description</p>
-                    <div class='card-user align-self-end d-flex align-items-center'>
-                        <img src='img/profile.png'/>
-                        <h3 class="card-username">username</h3>
+                    <div class="card-block d-flex">
+                        <h2 class="card-title">Cotton Candy Sky</h2>
+                        <h3 class="card-character">Dreki</h3>
+                        <p class="card-text">Description</p>
+                        <div class='card-user align-self-end d-flex align-items-center'>
+                            <img src='img/profile.png'/>
+                            <h3 class="card-username">username</h3>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card d-flex-row flex-wrap">
-                <div class="card-header border-0">
-                    <img src="//placehold.it/200" alt="">
-                </div>
-                <div class="card-block px-2 d-flex">
-                    <h2 class="card-title">Title</h2>
-                    <p class="card-text">Description</p>
-                    <div class='card-user align-self-end d-flex align-items-center'>
-                        <img src='img/profile.png'/>
-                        <h3 class="card-username">username</h3>
+                <div class="card d-flex-row flex-wrap">
+                    <div class="card-header" style="background-image: url('img/pierceOne.png'); background-size: cover; background-position: center;">
+                        <div class='card-image' style="background-image: url('img/pierceOne.png'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                    </div>
+                    <div class="card-block d-flex">
+                        <h2 class="card-title">Title</h2>
+                        <p class="card-text">Description</p>
+                        <div class='card-user align-self-end d-flex align-items-center'>
+                            <img src='img/profile.png'/>
+                            <h3 class="card-username">username</h3>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card d-flex-row flex-wrap">
-                <div class="card-header border-0">
-                    <img src="//placehold.it/200" alt="">
-                </div>
-                <div class="card-block px-2 d-flex">
-                    <h2 class="card-title">Title</h2>
-                    <p class="card-text">Description</p>
-                    <div class='card-user align-self-end d-flex align-items-center'>
-                        <img src='img/profile.png'/>
-                        <h3 class="card-username">username</h3>
+                <div class="card d-flex-row flex-wrap">
+                    <div class="card-header" style="background-image: url('img/nightmare.png'); background-size: cover; background-position: center;">
+                        <div class='card-image' style="background-image: url('img/nightmare.png'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
+                    </div>
+                    <div class="card-block d-flex">
+                        <h2 class="card-title">Title</h2>
+                        <p class="card-text">Description</p>
+                        <div class='card-user align-self-end d-flex align-items-center'>
+                            <img src='img/profile.png'/>
+                            <h3 class="card-username">username</h3>
+                        </div>
                     </div>
                 </div>
             </div>

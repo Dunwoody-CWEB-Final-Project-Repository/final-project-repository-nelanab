@@ -1,3 +1,95 @@
+<?php
+
+include 'config/core.php';
+include 'config/database.php';
+
+if ($_POST){
+    try{
+        $query = "INSERT INTO users
+                    SET username=:username, password=:password, email=:email;
+                    
+                    SELECT LAST_INSERT_ID() INTO @userID;
+                    
+                    INSERT INTO images
+                        SET image=:image;
+
+                    SELECT LAST_INSERT_ID() INTO @imageID;
+
+                    UPDATE users SET imageID = @imageID WHERE userID = @userID;
+                ";
+
+       // $db->query("BEGIN");
+        $stmt = $db->prepare($query);
+
+        $username=htmlspecialchars(strip_tags($_POST['username']));
+        $password=htmlspecialchars(strip_tags($_POST['password']));
+        $email=htmlspecialchars(strip_tags($_POST['email']));
+        $image=!empty($_FILES["image"]["name"])
+        ? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"])
+        : "";
+        $image=htmlspecialchars(strip_tags($image));
+
+        $stmt->bindParam(":username", $username);
+        $stmt->bindParam(":password", $password);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":image", $image);
+
+        if($stmt->execute()){
+            if(!empty($_FILES["image"]["tmp_name"])){
+                $target_directory = "uploads/";
+                $target_file = $target_directory . $image;
+                $file_type = pathinfo($target_file, PATHINFO_EXTENSION);
+
+                $file_upload_error_messages="";
+
+                $check = getimagesize($_FILES["image"]["tmp_name"]);
+
+                if($check !== false){
+
+                }
+                else{
+                    $file_upload_error_messages.="Please choose an image file.";
+                }
+
+                $allowed_file_types=array("jpg", "jpeg", "png", "gif");
+                if(!in_array($file_type, $allowed_file_types)){
+                    $file_upload_error_messages.="Please choose a jpg, jpeg, png, or gif file.";
+                }
+
+                if(file_exists($target_file)){
+                    $file_upload_error_messages="This image already exists. Please change the file's name.";
+                }
+
+                if($_FILES['image']['size'] > (5242880)){
+                    $file_upload_error_messages.="Please select an image that is less than 5 MB.";
+                }
+
+                if(empty($file_upload_error_messages)){
+                    if(move_uploaded_file($_FILES["image"]["tmp_name"],$target_file)){
+
+                    }
+                    else{
+                        echo"<script>alert('Unable to upload photo.')</script>";
+                    }
+                }
+                else{
+                    echo "<script>alert('{$file_upload_error_messages}')</script>";
+                }
+            }
+            
+        }
+        else{
+            echo "<script>alert('Unable to create account. Please try again.')</script>";
+        }
+    }
+    catch(PDOException $exception){
+        die('Error: ' . $exception->getMessage());
+    }
+
+    //$db->query("COMMIT");
+}
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -45,19 +137,19 @@
             <div id="login" class="align-self-center mx-auto d-block">
                 <h1>reffle</h1>
                 
-                <form action="#" enctype="multipart/form-data">
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data">
                     <table>
                         <tr>
-                            <input type='text' name='username' class='form-control' placeholder='username' />
+                            <input type='text' name='username' class='form-control' placeholder='username' required />
                         </tr>
                         <tr>
-                            <input type='password' name='password' class='form-control' placeholder='password' />
+                            <input type='password' name='password' class='form-control' placeholder='password' required />
                         </tr>
                         <tr>
-                            <input type='email' name='email' class='form-control' placeholder='email' />
+                            <input type='email' name='email' class='form-control' placeholder='email' required/>
                         </tr>
                         <tr>
-                        <input type="file" name="file" id="file" class="inputfile" />
+                        <input type="file" name="image" id="file" class="inputfile" />
                         <label id="imgLabel" for="file" class='btn btn-outline-secondary'>choose a profile image</label>
                         </tr>
                         <tr>

@@ -1,7 +1,7 @@
 body{
     width: 100vw;
     height: 100vh;
-    font-size: 1.481481vw;
+    font-size: 1.481481vw !important;
     background-color: #1D1D1D;
     grid-template-columns: repeat(12, 1fr);
     gap: 20px;
@@ -10,6 +10,7 @@ body{
     position: relative;
     display: grid;
     color: #F9F9F9;
+    overflow: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -35,11 +36,12 @@ body{
 }
 
 h3, p{
-    font-size: 1.5rem;
+    font-size: 1.25vw;
+    line-height: 1.2;
 }
 
 #postContainer{
-    height: 86.296vh;
+    height: 88.89vh;
     background-color: #262626;
     border-radius: 10px;
     padding: 1.875rem;
@@ -53,10 +55,10 @@ h3, p{
 #pageTitle{
     margin-top: 48px;
     grid-column-start: 2;
+    margin-bottom: 2.78vh;
 }
 
 .search{
-    height: 5.5vh;
     background-color: transparent;
     border: 2px solid #9FCB56;
     border-radius: 10px;
@@ -64,6 +66,7 @@ h3, p{
     font-size: 1.5rem;
     color: #F9F9F9;
     grid-column-end: 12;
+    top: 20px;
 }
 
 #searchForm{
@@ -75,12 +78,13 @@ h3, p{
 }
 
 .card{
-    height: 35.375rem;
+    height: 50.925926vh;
     color: #F9F9F9;
     position: relative;
     border-radius: 10px !important;
     z-index: 1 !important;
     background-color: #1D1D1D;
+    transition: 0.3s ease-in-out;
 }
 
 .card-header{
@@ -97,7 +101,7 @@ h3, p{
 .card-title{
     height: auto;
     margin-bottom: 0;
-    font-size: 2.25rem;
+    font-size: 1.875vw;
     font-weight: 700;
 }
 
@@ -110,6 +114,7 @@ h3, p{
 
 .card-text{
     height: 50%;
+    overflow: auto;
 }
 
 .card-user{
@@ -118,12 +123,12 @@ h3, p{
 }
 
 .card-username{
-    margin-left: 1.875rem;
+    margin-left: 1.5626vw;
 }
 
 .card-block img{
-    height: 4.5rem;
-    width: 4.5rem;
+    height: 3.75vw !important;
+    width: 3.75vw !important;
     border-radius: 10px;
 }
 
@@ -131,6 +136,16 @@ h3, p{
     height: 100%;
     backdrop-filter: blur(50px);
     border-radius: 10px !important;
+}
+
+.card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px #1D1D1D;
+    cursor: pointer;
+}
+
+.card-character{
+    color: #9FCB56;
 }
 
 

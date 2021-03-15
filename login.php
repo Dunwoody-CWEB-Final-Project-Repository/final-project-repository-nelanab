@@ -13,10 +13,10 @@
             <div id="login" class="align-self-center mx-auto d-block">
                 <h1>reffle</h1>
                 
-                <form action="#" enctype="multipart/form-data">
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" enctype="multipart/form-data">
                     <table>
                         <tr>
-                            <input type='text' name='username' class='form-control' placeholder='username' />
+                            <input type='text' name='username' class='form-control' placeholder='username' required />
                         </tr>
                         <tr>
                             <input type='password' name='password' class='form-control' placeholder='password' />
