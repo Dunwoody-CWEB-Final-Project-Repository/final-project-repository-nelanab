@@ -3,14 +3,18 @@
   include 'config/core.php';
   include 'config/database.php';
 
-  $query = "SELECT image=:image FROM images i
+  $query = "SELECT image FROM images i
   JOIN users u
   ON i.imageID = u.imageID
   WHERE userID = 5;";
 
   $stmt=$db->prepare($query);
-  $stmt->bindParam(':image', $image);
+  $stmt->bindParam(1,$image);
   $stmt->execute();
+
+  $row=$stmt->fetch(PDO::FETCH_ASSOC);
+
+  $image=htmlspecialchars($row['image'], ENT_QUOTES);
 ?>
 
 <div id="sidenav">
@@ -20,7 +24,7 @@
     </a>
   <a href="#" id="profile">
     <!--change this when database is implemented-->
-    <img src="uploads/<?php $image; ?>" alt="profile icon" class='image'>
+    <img src="uploads/<?php echo $image; ?>" alt="profile icon" class='image'>
     <h2 class='navLink'>anabnlsn</h2>
   </a>
   <a href="#" id="createPost" >
