@@ -52,3 +52,7 @@ button{
     width: 14.84375vw;
     font-size: 1.25vw;
 }
+
+#confirmBtns{
+    align-self: flex-end;
+}
