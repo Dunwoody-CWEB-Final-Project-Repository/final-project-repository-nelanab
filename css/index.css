@@ -1,7 +1,7 @@
 body{
     width: 100vw;
     height: 100vh;
-    font-size: 1.481481vw !important;
+    font-size: .833333vw !important;
     background-color: #1D1D1D;
     grid-template-columns: repeat(12, 1fr);
     gap: 20px;
@@ -41,7 +41,7 @@ h3, p{
 }
 
 #postContainer{
-    height: 88.89vh;
+    height: 86vh;
     background-color: #262626;
     border-radius: 10px;
     padding: 1.875rem;
@@ -63,7 +63,7 @@ h3, p{
     border: 2px solid #9FCB56;
     border-radius: 10px;
     width: 23vw;
-    font-size: 1.5rem;
+    font-size: 1.25vw;
     color: #F9F9F9;
     grid-column-end: 12;
     top: 20px;

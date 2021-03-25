@@ -86,7 +86,6 @@ if ($_POST){
         die('Error: ' . $exception->getMessage());
     }
 
-    //$db->query("COMMIT");
 }
 
 ?>
