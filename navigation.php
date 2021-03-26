@@ -27,7 +27,7 @@
     <img src="uploads/<?php echo $image; ?>" alt="profile icon" class='image'>
     <h2 class='navLink'>anabnlsn</h2>
   </a>
-  <a href="#" id="createPost" >
+  <a href="createPost.php" id="createPost" >
     <img src="img/post.png"/>
     <h2 class='navLink'>create post</h2>
   </a>

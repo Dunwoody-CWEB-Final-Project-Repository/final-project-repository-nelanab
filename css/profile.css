@@ -1,0 +1,14 @@
+#socialContainer{
+    display: flex;
+}
+#profilePic{
+    width: 7.8125vw;
+    height: 7.8125vw;
+    border-radius: 10px;
+    margin-right: 1.25rem;
+}
+
+#socialTitles img{
+    width: 2.083333vw;
+    height: 2.083333vw;
+}

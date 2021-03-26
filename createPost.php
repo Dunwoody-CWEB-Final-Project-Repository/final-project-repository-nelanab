@@ -98,7 +98,7 @@
         <link rel="stylesheet" href="css/overrides.css" />
         <link rel="stylesheet" href="css/index.css" />
         <link rel="stylesheet" href="css/navigation.css" />
-        <link rel="stylesheet" href="css/createPost.css"/>
+        <link rel="stylesheet" href="css/create.css"/>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
         <style>
             body{

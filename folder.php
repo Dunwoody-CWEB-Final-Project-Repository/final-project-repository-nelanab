@@ -89,12 +89,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Reffle - Create Post</title>
+        <title>Reffle - Create Folder</title>
         <link rel="stylesheet" href="libs/bootstrap-4.0.0/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/overrides.css" />
         <link rel="stylesheet" href="css/index.css" />
         <link rel="stylesheet" href="css/navigation.css" />
-        <link rel="stylesheet" href="css/createPost.css"/>
+        <link rel="stylesheet" href="css/create.css"/>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
         <style>
             body{
@@ -129,7 +129,7 @@
             include 'navigation.php';
         ?>
         <div id="container">
-            <h3 id="pageTitle">Create Post</h3>
+            <h3 id="pageTitle">Create Folder</h3>
             <form role="search" action="search.php" id="searchForm">
                 <div class="input-group">
                     <input type="text" class="search form-control" placeholder="search" name="s" id="search-term" required <?php echo isset($search_term) ? "value='$search_term'":""; ?> />
