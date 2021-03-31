@@ -1,20 +1,21 @@
 <?PHP
-
+  session_start();
   include 'config/core.php';
   include 'config/database.php';
+
+  $username = $_SESSION['userlogin'];
 
   $query = "SELECT image FROM images i
   JOIN users u
   ON i.imageID = u.imageID
-  WHERE userID = 5;";
-
+  WHERE userID = username=:username;";
   $stmt=$db->prepare($query);
   $stmt->bindParam(1,$image);
-  $stmt->execute();
+  $stmt->execute( array( ':username' => $username ));
 
-  $row=$stmt->fetch(PDO::FETCH_ASSOC);
-
-  $image=htmlspecialchars($row['image'], ENT_QUOTES);
+  while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+    $image = $row['image'];
+  }
 ?>
 
 <div id="sidenav">

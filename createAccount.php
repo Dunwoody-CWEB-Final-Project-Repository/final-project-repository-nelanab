@@ -3,8 +3,29 @@
 include 'config/core.php';
 include 'config/database.php';
 
-if ($_POST){
+if ( isset ($_POST[ 'signup' ])){
     try{
+        $username=htmlspecialchars(strip_tags($_POST['username']));
+        
+        $password=htmlspecialchars(strip_tags($_POST['password']));
+        $options = ['cost' => 12 ];
+        $hashedpass = password_hash($password, PASSWORD_BCRYPT, $options );
+
+        $email=htmlspecialchars(strip_tags($_POST['email']));
+        $image=!empty($_FILES["image"]["name"])
+        ? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"])
+        : "";
+        $image=htmlspecialchars(strip_tags($image));
+
+        // validate username
+        $val = "SELECT * FROM users  WHERE username=:username";
+        $valQuery = $db->prepare($val);
+        $valQuery->bindParam(":username", $username, PDO::PARAM_STR);
+        $valQuery->execute();
+        $results = $valQuery->fetchAll(PDO::FETCH_OBJ);
+        
+        if ( $valQuery->rowCount() == 0 ){
+
         $query = "INSERT INTO users
                     SET username=:username, password=:password, email=:email;
                     
@@ -21,17 +42,9 @@ if ($_POST){
        // $db->query("BEGIN");
         $stmt = $db->prepare($query);
 
-        $username=htmlspecialchars(strip_tags($_POST['username']));
-        $password=htmlspecialchars(strip_tags($_POST['password']));
-        $email=htmlspecialchars(strip_tags($_POST['email']));
-        $image=!empty($_FILES["image"]["name"])
-        ? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"])
-        : "";
-        $image=htmlspecialchars(strip_tags($image));
-
-        $stmt->bindParam(":username", $username);
+        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
         $stmt->bindParam(":password", $password);
-        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
         $stmt->bindParam(":image", $image);
 
         if($stmt->execute()){
@@ -79,14 +92,20 @@ if ($_POST){
             
         }
         else{
-            echo "<script>alert('Unable to create account. Please try again.')</script>";
+        echo "<script>alert('Unable to create account. Please try again.')</script>";
         }
+    }
+    else{
+        echo "<script>alert('Username already exists.')</script>";
+    }
+    
     }
     catch(PDOException $exception){
         die('Error: ' . $exception->getMessage());
     }
 
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -124,9 +143,22 @@ if ($_POST){
         </style>
         
         <script>
-            document.getElementById("#file").onchange = function(){
-                document.getElementById("#imgLabel").textContent = this.files[0].name;
+            function checkUsernameAvail() {
+                $("#loaderIcon").show();
+                jQuery.ajax({
+                    url: "check_availability.php",
+                    data: 'username='+$('#username').val(),
+                    type: "POST",
+                    success: function(data){
+                        $("#username-availability-status").html(data);
+                        $("#loaderIcon").hide();
+                    },
+                    error: function(){
+
+                    }
+                });
             }
+
 
     </script>
     </head>
@@ -139,7 +171,7 @@ if ($_POST){
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data">
                     <table>
                         <tr>
-                            <input type='text' name='username' class='form-control' placeholder='username' required />
+                            <input type='text' name='username' class='form-control' placeholder='username' onBlur="checkUsernameAvail()" required />
                         </tr>
                         <tr>
                             <input type='password' name='password' class='form-control' placeholder='password' required />
@@ -157,7 +189,7 @@ if ($_POST){
                         </tr>
                         <br>
                         <tr>
-                            <a href='login.php'><input value='return to sign in' class='btn btn-outline-primary' /></a>
+                            <a href='index.php'><input value='return to sign in' class='btn btn-outline-primary' /></a>
                         </tr>
                     </table>
                 </form>
