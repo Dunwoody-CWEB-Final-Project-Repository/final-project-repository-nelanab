@@ -1,38 +1,38 @@
-<?
+<?php
     session_start();
-
-    include('config.php');
+//Database Configuration File
+    include('config/database.php');
     error_reporting(0);
 
-    if(isset($_POST['login'])){
+    if(isset($_POST['login']))
+    {
         $username=$_POST['username'];
         $password=$_POST['password'];
 
-        $sql = "SELECT username, password FROM users WHERE username=:username";
-
-        $query= $db -> prepare($sql);
+        $sql ="SELECT username, password FROM users WHERE username=:username";
+        $query= $dbh -> prepare($sql);
         $query-> bindParam(':username', $username, PDO::PARAM_STR);
         $query-> execute();
         $results=$query->fetchAll(PDO::FETCH_OBJ);
 
-        if($query->rowCount() > 0){
-            foreach ($results as $row){
-                $hashpass=$row->password;
+        if($query->rowCount() > 0)
+        {
+            foreach ($results as $row) {
+                $hashedpass=$row->password;
             }
-
-            if (password_verify($password, $hashpass)){
-                $_SESSION['userlogin']=$_POST['username'];
-                echo "<script type= 'text/javascript'> document.location = 'home.php'; </script>";
-            }
-            else{
-                echo "<script>alert('Password was incorrect');</script>";
+            //verifying Password
+            if (password_verify($password, $hashedpass)) {
+                $_SESSION['userLogin']=$_POST['username'];
+                header('location:home.php');
+            } else {
+                echo "<script>console.log('didn't work')</script>";
             }
         }
         else{
-            echo "<script>alert('Username was not found.');</script>"; 
+            echo "<script>alert('User not registered with us');</script>";
         }
-    }
 
+    }
 ?>
 
 <!DOCTYPE html>
@@ -48,18 +48,21 @@
     <body>
         <div id="container">
             <div id="login" class="align-self-center mx-auto d-block">
-                <h1>reffle</h1>
+                <div id="logoTitle">
+                    <img src="img/logo.png" alt="apple logo"/>
+                    <h1>reffle</h1>
+                </div>
                 
-                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" enctype="multipart/form-data">
+                <form method="post">
                     <table>
                         <tr>
-                            <input type='text' name='username' class='form-control' placeholder='username' required />
+                            <input id='username' type='text' name='username' id='username' class='form-control' placeholder='username' required='' />
                         </tr>
                         <tr>
-                            <input type='password' name='password' class='form-control' placeholder='password' />
+                            <input type='password' name='password' id='password' class='form-control' placeholder='password' required=''/>
                         </tr>
                         <tr>
-                            <input type='submit' value='log in' class='btn btn-primary' />
+                            <input value="login" type='submit' class='btn btn-primary' name='login'/>
                         </tr>
                         <br>
                         <tr>

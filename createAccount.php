@@ -15,7 +15,6 @@ if ( isset ($_POST[ 'signup' ])){
         $image=!empty($_FILES["image"]["name"])
         ? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"])
         : "";
-        $image=htmlspecialchars(strip_tags($image));
 
         // validate username
         $val = "SELECT * FROM users  WHERE username=:username";
@@ -26,74 +25,70 @@ if ( isset ($_POST[ 'signup' ])){
         
         if ( $valQuery->rowCount() == 0 ){
 
-        $query = "INSERT INTO users
-                    SET username=:username, password=:password, email=:email;
-                    
-                    SELECT LAST_INSERT_ID() INTO @userID;
-                    
-                    INSERT INTO images
-                        SET image=:image;
+            $sql = "INSERT INTO users(username, password, email) VALUES (:username, :password, :email);
+            
+            SELECT LAST_INSERT_ID() INTO @userID;
+            
+            INSERT INTO images SET image=:image;
 
-                    SELECT LAST_INSERT_ID() INTO @imageID;
+            SELECT LAST_INSERT_ID() INTO @imageID;
 
-                    UPDATE users SET imageID = @imageID WHERE userID = @userID;
-                ";
+            UPDATE users SET imageID = @imageID WHERE userID = @userID;";
 
-       // $db->query("BEGIN");
-        $stmt = $db->prepare($query);
+            $query = $db->prepare($sql);
 
-        $stmt->bindParam(":username", $username, PDO::PARAM_STR);
-        $stmt->bindParam(":password", $password);
-        $stmt->bindParam(":email", $email, PDO::PARAM_STR);
-        $stmt->bindParam(":image", $image);
+            $query->bindParam(":username", $username, PDO::PARAM_STR);
+            $query->bindParam(":password", $hashedpass, PDO::PARAM_STR);
+            $query->bindParam(":email", $email, PDO::PARAM_STR);
+            $query->bindParam(":image", $image, PDO::PARAM_STR);
 
-        if($stmt->execute()){
-            if(!empty($_FILES["image"]["tmp_name"])){
-                $target_directory = "uploads/";
-                $target_file = $target_directory . $image;
-                $file_type = pathinfo($target_file, PATHINFO_EXTENSION);
+            if($query->execute()){
+                if(!empty($_FILES["image"]["tmp_name"])){
+                    $target_directory = "uploads/";
+                    $target_file = $target_directory . $image;
+                    $file_type = pathinfo($target_file, PATHINFO_EXTENSION);
 
-                $file_upload_error_messages="";
+                    $file_upload_error_messages="";
 
-                $check = getimagesize($_FILES["image"]["tmp_name"]);
+                    $check = getimagesize($_FILES["image"]["tmp_name"]);
 
-                if($check !== false){
-
-                }
-                else{
-                    $file_upload_error_messages.="Please choose an image file.";
-                }
-
-                $allowed_file_types=array("jpg", "jpeg", "png", "gif");
-                if(!in_array($file_type, $allowed_file_types)){
-                    $file_upload_error_messages.="Please choose a jpg, jpeg, png, or gif file.";
-                }
-
-                if(file_exists($target_file)){
-                    $file_upload_error_messages="This image already exists. Please change the file's name.";
-                }
-
-                if($_FILES['image']['size'] > (5242880)){
-                    $file_upload_error_messages.="Please select an image that is less than 5 MB.";
-                }
-
-                if(empty($file_upload_error_messages)){
-                    if(move_uploaded_file($_FILES["image"]["tmp_name"],$target_file)){
+                    if($check !== false){
 
                     }
                     else{
-                        echo"<script>alert('Unable to upload photo.')</script>";
+                        $file_upload_error_messages.="Please choose an image file.";
+                    }
+
+                    $allowed_file_types=array("jpg", "jpeg", "png", "gif");
+                    if(!in_array($file_type, $allowed_file_types)){
+                        $file_upload_error_messages.="Please choose a jpg, jpeg, png, or gif file.";
+                    }
+
+                    if(file_exists($target_file)){
+                        $file_upload_error_messages="This image already exists. Please change the file's name.";
+                    }
+
+                    if($_FILES['image']['size'] > (5242880)){
+                        $file_upload_error_messages.="Please select an image that is less than 5 MB.";
+                    }
+
+                    if(empty($file_upload_error_messages)){
+                        if(move_uploaded_file($_FILES["image"]["tmp_name"],$target_file)){
+
+                        }
+                        else{
+                            echo"<script>alert('Unable to upload photo.')</script>";
+                        }
+                    }
+                    else{
+                        echo "<script>alert('{$file_upload_error_messages}')</script>";
                     }
                 }
-                else{
-                    echo "<script>alert('{$file_upload_error_messages}')</script>";
-                }
+                
             }
-            
-        }
-        else{
-        echo "<script>alert('Unable to create account. Please try again.')</script>";
-        }
+            else{
+            echo "<script>alert('Unable to create account. Please try again.')</script>";
+            }
     }
     else{
         echo "<script>alert('Username already exists.')</script>";
@@ -144,14 +139,12 @@ if ( isset ($_POST[ 'signup' ])){
         
         <script>
             function checkUsernameAvail() {
-                $("#loaderIcon").show();
                 jQuery.ajax({
                     url: "check_availability.php",
                     data: 'username='+$('#username').val(),
                     type: "POST",
                     success: function(data){
-                        $("#username-availability-status").html(data);
-                        $("#loaderIcon").hide();
+                        console.log("check ran");
                     },
                     error: function(){
 
@@ -168,24 +161,24 @@ if ( isset ($_POST[ 'signup' ])){
             <div id="login" class="align-self-center mx-auto d-block">
                 <h1>reffle</h1>
                 
-                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data">
+                <form action='' method="post" >
                     <table>
                         <tr>
-                            <input type='text' name='username' class='form-control' placeholder='username' onBlur="checkUsernameAvail()" required />
+                            <input type='text' name='username' class='form-control' placeholder='username' onBlur="checkUsernameAvail()" id="username" required />
                         </tr>
                         <tr>
-                            <input type='password' name='password' class='form-control' placeholder='password' required />
+                            <input type='password' name='password' class='form-control' id="password" placeholder='password' required />
                         </tr>
                         <tr>
                             <input type='email' name='email' class='form-control' placeholder='email' required/>
                         </tr>
                         <tr>
-                        <input type="file" name="image" id="file" class="inputfile" />
-                        <label id="imgLabel" for="file" class='btn btn-outline-secondary'>choose a profile image</label>
+                        <input type="file" name="image" id="image" class="inputfile" />
+                        <label id="imgLabel" for="image" class='btn btn-outline-secondary'>choose a profile image</label>
                         </tr>
                         <tr>
                             <a href="createAccount.php">
-                            <input type='submit' value='create account' class='btn btn-primary' /></a>
+                            <input type='submit' value='create account' class='btn btn-primary' name='signup'/></a>
                         </tr>
                         <br>
                         <tr>

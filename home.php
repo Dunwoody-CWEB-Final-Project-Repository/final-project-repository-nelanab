@@ -1,7 +1,14 @@
 <?php 
+    session_start();
     include 'config/database.php';
-
     include 'config/core.php';
+    
+    if(strlen($_SESSION['userLogin']) == 0){
+        header('location:index.php');
+    }
+    else{
+        $username = $_SESSION['userLogin'];
+
 ?>
 
 <!DOCTYPE html>
@@ -75,3 +82,4 @@
 
     </body>
 </html>
+<?php }?>

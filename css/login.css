@@ -29,7 +29,7 @@ h1{
     color: #F9F9F9;
     font-weight: 900;
     margin-bottom: 1rem;
-    font-size: 4.5rem;
+    font-size: 4.5em;
 }
 
 input{
@@ -38,4 +38,19 @@ input{
 
 span{
     width: 100%;
+}
+
+#logoTitle{
+    display: flex;
+    align-items: center;
+}
+
+#logoTitle img{
+    width: 3.75vw !important;
+    height: 3.75vw !important;
+    margin-bottom: 1.2em;
+}
+
+.btn{
+    font-size: 1.5em;
 }
