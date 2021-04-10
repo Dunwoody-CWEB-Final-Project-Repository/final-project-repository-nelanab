@@ -38,7 +38,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Reffle - Log In</title>
+        <title>Reffle - Home</title>
         <link rel="stylesheet" href="libs/bootstrap-4.0.0/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/overrides.css" />
         <link rel="stylesheet" href="css/login.css" />

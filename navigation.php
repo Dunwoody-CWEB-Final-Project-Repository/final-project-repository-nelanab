@@ -1,4 +1,5 @@
 <?PHP
+  session_start(); 
   $username = $_SESSION['userLogin'];
 
   $query = $db->prepare("SELECT image FROM images i JOIN users u ON i.imageID = u.imageID WHERE username=:username");
@@ -25,5 +26,8 @@
   <a href="#" id="settings">
     <img src="img/settings.png" alt="settings icon"/>
     <h2 class='navLink'>settings</h2>
+  </a>
+  <a href="logout.php" id="logout">
+    <button class='btn btn-outline-danger button'>logout</button>
   </a>
 </div>

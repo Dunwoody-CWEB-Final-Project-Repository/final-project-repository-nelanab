@@ -24,7 +24,6 @@
             $title=htmlspecialchars(strip_tags($_POST['title']));
             $folderID=htmlspecialchars(strip_tags($_POST['folderID']));
             $description=htmlspecialchars(strip_tags($_POST['description']));
-            $userID=htmlspecialchars($_POST['userID']);
             $image=!empty($_FILES["image"]["name"])
             ? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"])
             : "";

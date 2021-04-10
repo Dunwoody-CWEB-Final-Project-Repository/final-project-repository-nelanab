@@ -72,3 +72,24 @@ h1{
     font-weight: 900;
 }
 
+#logout{
+    bottom: 1.851852vh;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+    transition: all .3s ease-in-out;
+    height: auto !important;
+}
+
+#sidenav:hover #logout{
+    opacity: 100%;
+    width: 24vw;
+}
+
+#sidenav:hover .button{
+    left: 20px !important;
+    width: 14.884375vw !important;
+}
+

@@ -11,4 +11,67 @@
 #socialTitles img{
     width: 2.083333vw;
     height: 2.083333vw;
+    margin-right: .5vw;
+    transition: transform .2s ease-in-out;
+}
+
+#socialTitles img:hover{
+    transform: scale(1.05);
+}
+
+#posts{
+    grid-column: 1/2;
+    display: grid;
+    grid-auto-rows: 13.28125vw;
+    grid-auto-flow: row dense;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+    height: 50vh;
+    gap: 1.5625vw;
+    overflow-y: auto;
+    align-content: space-between;
+    padding-right: 1.5625vw;
+}
+
+#folders{
+    grid-column: 2 / 3;
+    display: grid;
+    grid-auto-rows: 13.28125vw;
+    grid-template-columns: repeat(3,1fr);
+    justify-content: space-between;
+    height: 50vh;
+    gap: 1.5625vw;
+    overflow-y: auto;
+    align-content: space-between;
+    padding-right: 1.5625vw;
+}
+
+.post, .folder{
+    border-radius: 10px;
+    transition: transform .2s ease-in-out;
+}
+
+.post:hover, .folder:hover{
+    transform: scale(1.05);
+}
+
+#postsLabel{
+    grid-column: 1 / 2;
+    display: flex;
+    justify-content: space-between;
+}
+
+#folderLabel{
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+}
+
+#postsLabel .btn, #folderLabel .btn{
+    width: 14.84375vw;
+    font-size: 1.25vw !important;
+    text-align: center;
+    align-content: center;
 }
