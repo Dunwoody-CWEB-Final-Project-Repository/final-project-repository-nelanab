@@ -7,6 +7,7 @@
 	try
 	{
 		$db = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME,DB_USER, DB_PASS);
+		$db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, false);
 	}
 	catch (PDOException $e)
 	{

@@ -75,3 +75,7 @@
     text-align: center;
     align-content: center;
 }
+
+.h2, h2{
+    margin-bottom: 0 !important;
+}

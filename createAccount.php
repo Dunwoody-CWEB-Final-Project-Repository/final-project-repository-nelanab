@@ -6,15 +6,13 @@ include 'config/database.php';
 if ( isset ($_POST[ 'signup' ])){
     try{
         $username=htmlspecialchars(strip_tags($_POST['username']));
-        
-        $password=htmlspecialchars(strip_tags($_POST['password']));
-        $options = ['cost' => 12 ];
-        $hashedpass = password_hash($password, PASSWORD_BCRYPT, $options );
-
         $email=htmlspecialchars(strip_tags($_POST['email']));
         $image=!empty($_FILES["image"]["name"])
         ? sha1_file($_FILES['image']['tmp_name']) . "-" . basename($_FILES["image"]["name"])
         : "";
+        $password=htmlspecialchars(strip_tags($_POST['password']));
+        $options = ['cost' => 12 ];
+        $hashedpass = password_hash($password, PASSWORD_BCRYPT, $options );
 
         // validate username
         $val = "SELECT * FROM users  WHERE username=:username";
@@ -25,15 +23,7 @@ if ( isset ($_POST[ 'signup' ])){
         
         if ( $valQuery->rowCount() == 0 ){
 
-            $sql = "INSERT INTO users(username, password, email) VALUES (:username, :password, :email);
-            
-            SELECT LAST_INSERT_ID() INTO @userID;
-            
-            INSERT INTO images SET image=:image;
-
-            SELECT LAST_INSERT_ID() INTO @imageID;
-
-            UPDATE users SET imageID = @imageID WHERE userID = @userID;";
+            $sql = "INSERT INTO users(username, password, email, profilePic) VALUES (:username, :password, :email, :image);";
 
             $query = $db->prepare($sql);
 
@@ -159,7 +149,10 @@ if ( isset ($_POST[ 'signup' ])){
     <body>
         <div id="container">
             <div id="login" class="align-self-center mx-auto d-block">
-                <h1>reffle</h1>
+                <div id="logoTitle">
+                    <img src="img/logo.png" alt="apple logo"/>
+                    <h1>reffle</h1>
+                </div>
                 
                 <form action='' method="post" >
                     <table>

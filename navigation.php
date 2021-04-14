@@ -1,22 +1,21 @@
-<?PHP
-  session_start(); 
-  $username = $_SESSION['userLogin'];
+<?PHP 
+  $username = $_SESSION['userlogin'];
 
-  $query = $db->prepare("SELECT image FROM images i JOIN users u ON i.imageID = u.imageID WHERE username=:username");
+  $query = $db->prepare("SELECT profilePic FROM users WHERE username=:username");
   $query->execute(array(':username' => $username) );
   while ($row = $query->fetch(PDO::FETCH_ASSOC)){
-    $image = $row['image'];
+    $profilePic = $row['profilePic'];
   }
 ?>
 
 <div id="sidenav">
-    <a href="index.php" id="home">
+    <a href="home.php" id="home">
         <img src="img/logo.png" alt="reffle logo"/>
         <h1 class='navLink'>reffle</h1>
     </a>
-  <a href="#" id="profile">
+  <a href="profile.php" id="profile">
     <!--change this when database is implemented-->
-    <img src="uploads/<?php echo $image; ?>" alt="profile icon" class='image'>
+    <img src="uploads/<?php echo $profilePic; ?>" alt="profile icon" class='image'>
     <h2 class='navLink'><?php echo $username; ?></h2>
   </a>
   <a href="createPost.php" id="createPost" >

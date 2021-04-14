@@ -1,40 +1,42 @@
 <?php
     session_start();
-//Database Configuration File
+    //Database Configuration File
     include('config/database.php');
     error_reporting(0);
 
     if(isset($_POST['login']))
     {
-        $username=$_POST['username'];
-        $password=$_POST['password'];
 
-        $sql ="SELECT username, password FROM users WHERE username=:username";
-        $query= $dbh -> prepare($sql);
-        $query-> bindParam(':username', $username, PDO::PARAM_STR);
+        // Getting username/ email and password
+        $uname=$_POST['username'];
+        $password=$_POST['password'];
+        // Fetch data from database on the basis of username/email and password
+        $sql ="SELECT username,email,password FROM users WHERE (username=:usname || email=:usname)";
+        $query= $db -> prepare($sql);
+        $query-> bindParam(':usname', $uname, PDO::PARAM_STR);
         $query-> execute();
         $results=$query->fetchAll(PDO::FETCH_OBJ);
-
         if($query->rowCount() > 0)
         {
-            foreach ($results as $row) {
-                $hashedpass=$row->password;
-            }
-            //verifying Password
-            if (password_verify($password, $hashedpass)) {
-                $_SESSION['userLogin']=$_POST['username'];
-                header('location:home.php');
-            } else {
-                echo "<script>console.log('didn't work')</script>";
-            }
+        foreach ($results as $row) {
+        $hashpass=$row->password;
         }
+        //verifying Password
+        if (password_verify($password, $hashpass)) {
+            $_SESSION['userlogin']=$_POST['username'];
+            echo "<script type='text/javascript'> document.location = 'home.php'; </script>";
+        } else {
+        echo "<script>alert('Wrong Password');</script>";
+
+        }
+        }
+        //if username or email not found in database
         else{
-            echo "<script>alert('User not registered with us');</script>";
+        echo "<script>alert('User not registered with us');</script>";
         }
 
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -62,7 +64,7 @@
                             <input type='password' name='password' id='password' class='form-control' placeholder='password' required=''/>
                         </tr>
                         <tr>
-                            <input value="login" type='submit' class='btn btn-primary' name='login'/>
+                            <button type='submit' class='btn btn-primary' name='login'>log in</button>
                         </tr>
                         <br>
                         <tr>

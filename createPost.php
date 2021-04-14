@@ -1,21 +1,40 @@
 <?php 
     include 'config/database.php';
-
     include 'config/core.php';
+    session_start();
+    
+    
+    if(strlen($_SESSION['userlogin']) == 0){
+        header('location:index.php');
+    }
+    else{
+        $username = $_SESSION['userlogin'];
 
+        $getID = $db->prepare('SELECT userID FROM users WHERE username=:username',
+        array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false));
+        $getID->execute(array(':username' => $username) );
+        while ($row = $getID->fetch(PDO::FETCH_ASSOC)){
+            $userID = $row['userID'];
+        }
     if ($_POST){
         try{
-            $query = "INSERT INTO posts
-                        SET title=:title, folderID=:folderID description=:description, userID=:userID;
+            
+
+            $query = "SET foreign_key_checks = 0;
                         
-                        SELECT LAST_INSERT_ID() INTO @userID;
+                        INSERT INTO posts
+                        SET title=:title, folderID=:folderID, description=:description, userID = :userID;
+                        
+                        SELECT LAST_INSERT_ID() INTO @postID;
                         
                         INSERT INTO images
                             SET image=:image;
     
                         SELECT LAST_INSERT_ID() INTO @imageID;
     
-                        UPDATE posts SET imageID = @imageID WHERE userID = @userID;
+                        UPDATE posts SET imageID = @imageID WHERE postID = @postID;
+
+                        SET foreign_key_checks = 1;
                     ";
     
            // $db->query("BEGIN");
@@ -33,6 +52,7 @@
             $stmt->bindParam(":folderID", $folderID);
             $stmt->bindParam(":description", $description);
             $stmt->bindParam(":image", $image);
+            $stmt->bindParam(":userID", $userID);
     
             if($stmt->execute()){
                 if(!empty($_FILES["image"]["tmp_name"])){
@@ -155,15 +175,14 @@
                                     <option value="" disabled selected hidden>select folder</option>
                                     <option>
                                         <?php
-                                        $query = "SELECT folderID, title FROM folders WHERE userID = 5 ORDER BY title";
-
-                                        // prepare query statement and execute
-                                        $stmt = $db->prepare( $query );
+                                        $stmt = $db->prepare('SELECT folderID, name FROM folders WHERE userID = :userID ORDER BY name',
+        array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false));
+                                        $stmt->bindParam(":userID", $userID);
                                         $stmt->execute();
 
                                             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                                                 extract($row);
-                                                echo "<option value='{$folderID}'>{$title}</option>";
+                                                echo "<option value='{$folderID}'>{$name}</option>";
                                             }
                                         ?>
                                     </option>
@@ -173,8 +192,7 @@
                                 <textarea name='description' class='form-control' placeholder='description' id="description"></textarea>
                             </tr>
                             <tr>
-                                <a href="createAccount.php">
-                                <input type='submit' value='create post' class='btn btn-primary button' /></a>
+                                <button type='submit' value='create post' class='btn btn-primary button'>create post</button>
                                 <a href="createAccount.php">
                                 <button class='btn btn-outline-danger button'>discard</button></a>
                             </tr>
@@ -186,3 +204,4 @@
 
     </body>
 </html>
+<?PHP } ?>

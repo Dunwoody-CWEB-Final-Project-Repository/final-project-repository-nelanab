@@ -1,21 +1,24 @@
-<!--<?php 
+<?php 
     include 'config/database.php';
-
     include 'config/core.php';
+    session_start();
+    if(strlen($_SESSION['userlogin']) == 0){
+        header('location:index.php');
+    }
+    else{
+        $username = $_SESSION['userlogin'];
 
-    $query = "SELECT image FROM images i
-    JOIN users u
-    ON i.imageID = u.imageID
-    WHERE userID = 5;";
+    $query = "SELECT profilePic FROM users u
+    WHERE username = :username;";
 
     $stmt=$db->prepare($query);
-    $stmt->bindParam(1,$image);
+    $stmt->bindParam(':username', $username);
     $stmt->execute();
 
     $row=$stmt->fetch(PDO::FETCH_ASSOC);
 
-    $image=htmlspecialchars($row['image'], ENT_QUOTES);
-?>-->
+    $profilePic=htmlspecialchars($row['profilePic'], ENT_QUOTES);
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,9 +35,9 @@
     </head>
     
     <body>
-       
+       <?PHP include 'navigation.php'; ?>
         <div id="container">
-            <h3 id="pageTitle">anabnlsn</h3>
+            <h3 id="pageTitle"><?php echo $username?></h3>
             <form role="search" action="search.php" id="searchForm">
                 <div class="input-group">
                     <input type="text" class="search form-control" placeholder="search" name="s" id="search-term" required <?php echo isset($search_term) ? "value='$search_term'":""; ?> />
@@ -43,9 +46,9 @@
 
             <div id="postContainer">
                 <div id="socialContainer">
-                    <img src="uploads/<?php echo $image; ?>" id="profilePic" alt="user profile image"/>
+                    <img src="uploads/<?php echo $profilePic; ?>" id="profilePic" alt="user profile image"/>
                     <div id="socialTitles" >
-                        <h2>anabnlsn</h2>
+                        <h2><?php echo $username;?></h2>
                         <h3>Hobby Artist</h3>
                         <img src="img/twitter.png" alt="twitter logo"/>
                         <img src="img/instagram.png"/>
@@ -78,7 +81,7 @@
 
                 <div id="folderLabel">
                     <h2>Folders</h2>
-                    <a href="createPost.php" class="btn btn-primary">new post</a>
+                    <a href="folder.php" class="btn btn-primary text-center">new folder</a>
                 </div>
                 <div id="folders">
                 <div class="folder" style="background-image:url('img/nightmare.png'); background-size:cover; background-position: center;">
@@ -90,3 +93,5 @@
 
     </body>
 </html>
+
+<?PHP } ?>
