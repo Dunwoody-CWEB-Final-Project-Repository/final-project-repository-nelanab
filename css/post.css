@@ -1,0 +1,34 @@
+#postImage{
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+    border-radius: 10px;
+}
+
+#profilePic{
+    width: 3.75vw !important;
+    height: 3.75vw !important;
+    border-radius: 10px; 
+}
+
+.card-title{
+    line-height: 1.2em;
+}
+
+.card-character{
+    line-height: 1.2em;
+}
+
+.card-user{
+    width: 100%;
+}
+
+.card-user a{
+    display: flex;
+    align-items: center;
+}
+
+#edit{
+    margin-left: auto;
+}

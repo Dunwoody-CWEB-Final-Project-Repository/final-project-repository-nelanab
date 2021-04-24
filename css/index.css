@@ -88,7 +88,7 @@ h3, p{
 }
 
 .card-header{
-    width: 53%;
+    width: 53% !important;
     height: 100%;
     padding: 0;
     border-radius: 10px !important;
@@ -109,7 +109,7 @@ h3, p{
     padding: 1.875rem !important;
     flex-wrap: wrap;
     height: 100%;
-    width: 47%;
+    width: 47% !important;
 }
 
 .card-text{
@@ -135,6 +135,7 @@ h3, p{
 .card-image{
     height: 100%;
     backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
     border-radius: 10px !important;
 }
 
@@ -146,6 +147,19 @@ h3, p{
 
 .card-character{
     color: #9FCB56;
+}
+
+.card-user a{
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.card a{
+    width: auto;
+    height: auto;
+    display: flex;
 }
 
 

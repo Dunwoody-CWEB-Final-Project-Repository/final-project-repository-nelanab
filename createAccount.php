@@ -97,9 +97,16 @@ if ( isset ($_POST[ 'signup' ])){
 <html>
     <head>
         <title>Reffle - Create Account</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" Content-Type: text/html; />
+        <meta name="description" content="Reffle - Original Character Art Hosting">
+        <meta name="keywords" content="art, character art, art hosting, reffle">
+        <meta name="author" content="Ana Nelson">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="libs/bootstrap-4.0.0/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/overrides.css" />
         <link rel="stylesheet" href="css/login.css" />
+        <link rel="icon" href="favicon.ico">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;800;900&display=swap" rel="stylesheet">
 
@@ -154,7 +161,7 @@ if ( isset ($_POST[ 'signup' ])){
                     <h1>reffle</h1>
                 </div>
                 
-                <form action='' method="post" >
+                <form action='' method="post" enctype="multipart/form-data">
                     <table>
                         <tr>
                             <input type='text' name='username' class='form-control' placeholder='username' onBlur="checkUsernameAvail()" id="username" required />

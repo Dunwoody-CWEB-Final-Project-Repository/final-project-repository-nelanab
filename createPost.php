@@ -10,8 +10,7 @@
     else{
         $username = $_SESSION['userlogin'];
 
-        $getID = $db->prepare('SELECT userID FROM users WHERE username=:username',
-        array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false));
+        $getID = $db->prepare('SELECT userID FROM users WHERE username=:username');
         $getID->execute(array(':username' => $username) );
         while ($row = $getID->fetch(PDO::FETCH_ASSOC)){
             $userID = $row['userID'];
@@ -113,12 +112,20 @@
 <html>
     <head>
         <title>Reffle - Create Post</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" Content-Type: text/html; />
+        <meta name="description" content="Reffle - Original Character Art Hosting">
+        <meta name="keywords" content="art, character art, art hosting, reffle">
+        <meta name="author" content="Ana Nelson">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="libs/bootstrap-4.0.0/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/overrides.css" />
         <link rel="stylesheet" href="css/index.css" />
         <link rel="stylesheet" href="css/navigation.css" />
         <link rel="stylesheet" href="css/create.css"/>
+        <link rel="icon" href="favicon.ico">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        <script src="libs/bootstrap-4.0.0/js/tests/vendor/jquery-1.9.1.min.js"></script>
         <style>
             body{
                 font-size: 8.33333vw;
@@ -162,7 +169,8 @@
             <div id="postContainer">
                 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="postForm">
                     <div id="imgUpload">
-                        <input type="file" name="image" id="file" class="inputfile" />
+                        <img src="#" id="uploadImg" style='display: none;'/>
+                        <input onchange="readURL(this);" type="file" name="image" id="file" class="inputfile" />
                         <label id="imgLabel" for="file" class='btn btn-outline-secondary'>choose image</label>
                     </div>
                     <div id="postInfo">
@@ -192,9 +200,10 @@
                                 <textarea name='description' class='form-control' placeholder='description' id="description"></textarea>
                             </tr>
                             <tr>
-                                <button type='submit' value='create post' class='btn btn-primary button'>create post</button>
-                                <a href="createAccount.php">
-                                <button class='btn btn-outline-danger button'>discard</button></a>
+                            <a href="profile.php?id=<?PHP echo $userID?>">
+                                <input type='submit' value='create post' class='btn btn-primary button' /></a>
+                                <a href="profile.php?id=<?PHP echo $userID?>">
+                                <div class='btn btn-outline-danger button'>discard</div></a>
                             </tr>
                         </table>
                     </div>
@@ -203,5 +212,23 @@
         </div>
 
     </body>
+    <script>
+        function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+                document.getElementById("uploadImg").style.display="block";
+                $('#uploadImg').attr('src', e.target.result);
+            }
+            
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+        }
+
+        $("#file").change(function() {
+            readURL(this);
+        });
+    </script>
 </html>
 <?PHP } ?>

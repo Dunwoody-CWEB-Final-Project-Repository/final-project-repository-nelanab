@@ -41,9 +41,16 @@
 <html lang="en">
     <head>
         <title>Reffle - Home</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" Content-Type: text/html; />
+        <meta name="description" content="Reffle - Original Character Art Hosting">
+        <meta name="keywords" content="art, character art, art hosting, reffle">
+        <meta name="author" content="Ana Nelson">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="libs/bootstrap-4.0.0/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/overrides.css" />
         <link rel="stylesheet" href="css/login.css" />
+        <link rel="icon" href="favicon.ico">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;800;900&display=swap" rel="stylesheet">
     </head>
 

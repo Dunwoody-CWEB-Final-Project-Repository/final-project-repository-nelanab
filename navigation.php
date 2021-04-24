@@ -1,11 +1,13 @@
 <?PHP 
   $username = $_SESSION['userlogin'];
 
-  $query = $db->prepare("SELECT profilePic FROM users WHERE username=:username");
-  $query->execute(array(':username' => $username) );
-  while ($row = $query->fetch(PDO::FETCH_ASSOC)){
-    $profilePic = $row['profilePic'];
-  }
+  $nav = $db->prepare("SELECT profilePic, userID FROM users WHERE username=:username LIMIT 0,1");
+  $nav->bindParam(":username", $username);
+  $nav->execute();
+  $row = $nav->fetch(PDO::FETCH_ASSOC);
+
+  $profilePic = htmlspecialchars($row['profilePic'], ENT_QUOTES);
+  $loggedInID = htmlspecialchars($row['userID'], ENT_QUOTES);
 ?>
 
 <div id="sidenav">
@@ -13,8 +15,7 @@
         <img src="img/logo.png" alt="reffle logo"/>
         <h1 class='navLink'>reffle</h1>
     </a>
-  <a href="profile.php" id="profile">
-    <!--change this when database is implemented-->
+  <a href="profile.php?id=<?PHP echo $loggedInID?>" id="profile">
     <img src="uploads/<?php echo $profilePic; ?>" alt="profile icon" class='image'>
     <h2 class='navLink'><?php echo $username; ?></h2>
   </a>

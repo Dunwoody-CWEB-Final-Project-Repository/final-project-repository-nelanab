@@ -21,10 +21,17 @@
 <html>
     <head>
         <title>Reffle - Home</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" Content-Type: text/html; />
+        <meta name="description" content="Reffle - Original Character Art Hosting">
+        <meta name="keywords" content="art, character art, art hosting, reffle">
+        <meta name="author" content="Ana Nelson">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="libs/bootstrap-4.0.0/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/overrides.css" />
         <link rel="stylesheet" href="css/index.css" />
         <link rel="stylesheet" href="css/navigation.css" />
+        <link rel="icon" href="favicon.ico">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     </head>
     
@@ -42,33 +49,35 @@
 
             <div id="postContainer">
             <?PHP 
-            $query = "SELECT p.title, p.description, i.image, u.username, f.name, u.profilePic FROM posts p
+            $query = "SELECT p.postID, p.title, p.description, i.image, u.username, f.name, u.profilePic, u.userID FROM posts p
             JOIN images i
             ON p.imageID = i.imageID
             JOIN users u 
             ON p.userID = u.userID
             JOIN folders f
             ON f.folderID = p.folderID
-            ORDER BY p.created DESC";
+            ORDER BY p.created DESC LIMIT 20";
 
             $stmt = $db->prepare($query);
             $stmt->execute();
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                 extract($row);?>
-                <div class="card d-flex-row flex-wrap">
+                <a href="post.php?id=<?PHP echo $postID?>">
+                <div id="postCard" class="card d-flex-row flex-wrap" >
                     <div class="card-header" style="background-image: url('uploads/<?php echo $image; ?>'); background-size: cover; background-position: center;">
                         <div class='card-image' style="background-image: url('uploads/<?php echo $image; ?>'); background-size: contain; background-repeat: no-repeat; background-position: center;"></div>
                     </div>
                     <div class="card-block d-flex">
                         <h2 class="card-title"><?PHP echo $title; ?></h2>
                         <h3 class="card-character"><?PHP echo $name; ?></h3>
-                        <p class="card-text"><?PHP echo $description; ?></p>
+                        <p class="card-text" style="font-weight: normal;"><?PHP echo $description; ?></p>
                         <div class='card-user align-self-end d-flex align-items-center'>
                             <img src='uploads/<?PHP echo $profilePic; ?>'/>
                             <h3 class="card-username"><?PHP echo $username; ?></h3>
                         </div>
                     </div>
-                </div>
+                </div></a>
+               
                 <?PHP
             }
             ?>
@@ -77,5 +86,6 @@
         </div>
 
     </body>
+   
 </html>
 <?php }?>

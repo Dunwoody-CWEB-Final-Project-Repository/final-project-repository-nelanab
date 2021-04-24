@@ -20,7 +20,7 @@ body{
 
 .btn{
     border-radius: 1.25rem;
-    height: 4.375rem;
+    height: 6.481481vh !important;
     font-size: 1.5rem;
     font-weight: 900;
     border: 2px solid;
@@ -29,8 +29,11 @@ body{
     color: #F9F9F9;
     background-color: #9FCB56;
     border: none;
-    height: 4.375rem;
-    box-shadow: 0px 6px 10px rgba(159, 203, 86, 0.2)
+    height: 6.481481vh !important;
+    box-shadow: 0px 6px 10px rgba(159, 203, 86, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-primary.disabled, .btn-primary:disabled {
@@ -133,7 +136,7 @@ body{
     border: none;
     border-radius: .625rem;
     height: 2.75rem;
-    font-size: 1.5rem;
+    font-size: 1.5rem !important;
     color: #F9F9F9;
 }
 
@@ -147,6 +150,7 @@ body{
 .form-control::-webkit-input-placeholder {
     color: #F9F9F9;
     opacity: 50%;
+    font-size: 1.5rem !important;
   }
 
 input:-webkit-autofill,
@@ -158,11 +162,17 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  border: none;
+  border: #9FCB56 3px solid;
   -webkit-text-fill-color: #F9F9F9;
-  -webkit-box-shadow: none;
+  -webkit-box-shadow: 0 0 0 30px #262626 inset !important;
   box-shadow: none;
   background-color: #262626;
+  font-size: 1.5rem !important;
+}
+
+input:-internal-autofill-selected, :-internal-autofill-previewed{
+  background-color: #262626 !important;
+  font-size: 1.5rem !important;
 }
 
 p{
@@ -171,10 +181,13 @@ p{
 
 a{
     text-decoration: none;
+    color: #F9F9F9;
+    transition: .15s ease-in-out;
 }
 
 a:hover{
     text-decoration: none;
+    color: #9FCB56;
 }
 
 .btn-file {
@@ -199,4 +212,11 @@ a:hover{
 label{
   margin-bottom: 1.875rem !important;
   width: 100%;
+}
+
+.btn-outline-danger{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1vw;
 }

@@ -15,6 +15,7 @@ body{
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+    overflow: hidden;
 }
 
 #postForm{
@@ -54,6 +55,15 @@ button{
     font-size: 1.25vw;
 }
 
-#confirmBtns{
-    align-self: flex-end;
+#postInfo .btn{
+    margin-top: auto;
+}
+
+#uploadImg{
+    width: 100%;
+}
+
+#imgLabel, #file{
+    position: absolute;
+    z-index: 1;
 }
