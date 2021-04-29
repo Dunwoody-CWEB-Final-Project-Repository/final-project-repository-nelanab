@@ -1,0 +1,20 @@
+#posts, #folders, #users{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr) !important;
+    grid-auto-rows: 13.28125vw;
+    grid-auto-flow: row dense;
+    gap: 1.5625vw;
+}
+
+#users{
+    justify-content: space-between;
+    height: 50vh;
+    gap: 1.5625vw;
+    overflow-y: auto;
+    align-content: space-between;
+    padding-right: 1.5625vw;
+}
+
+#container{
+    overflow-y: auto;
+}

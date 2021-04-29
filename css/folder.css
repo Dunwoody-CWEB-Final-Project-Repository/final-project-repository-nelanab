@@ -1,4 +1,7 @@
 #postContainer{
     display: grid;
     grid-template-columns: repeat(6, 1fr) !important;
+    grid-auto-rows: 13.28125vw;
+    grid-auto-flow: row dense;
+    gap: 1.5625vw;
 }

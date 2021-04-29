@@ -56,6 +56,8 @@ h3, p{
     margin-top: 48px;
     grid-column-start: 2;
     margin-bottom: 2.78vh;
+    color: #9FCB56;
+    font-weight: 700;
 }
 
 .search{

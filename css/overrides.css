@@ -136,7 +136,7 @@ body{
     border: none;
     border-radius: .625rem;
     height: 2.75rem;
-    font-size: 1.5rem !important;
+    font-size: 1.25vw !important;
     color: #F9F9F9;
 }
 
@@ -150,7 +150,7 @@ body{
 .form-control::-webkit-input-placeholder {
     color: #F9F9F9;
     opacity: 50%;
-    font-size: 1.5rem !important;
+    font-size: 1.25vw !important;
   }
 
 input:-webkit-autofill,

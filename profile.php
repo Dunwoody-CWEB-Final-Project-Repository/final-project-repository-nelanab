@@ -135,7 +135,7 @@
                 </div>
                 <div id="folders">
                 <?PHP 
-                    $query = "SELECT i.image, f.name FROM folders f
+                    $query = "SELECT i.image, f.name, f.folderID FROM folders f
                     JOIN images i
                     ON f.imageID = i.imageID
                     JOIN users u
@@ -148,8 +148,8 @@
                     $stmt->execute();
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                         extract($row);?>
-                        <div class="folder" style="background-image:url('uploads/<?PHP echo $image?>'); background-size:cover; background-position: center;"><h1><?PHP echo $name?></h1>
-                            </div>
+                        <a href="folderPosts.php?id=<?PHP echo $folderID?>"><div class="folder" style="background-image:url('uploads/<?PHP echo $image?>'); background-size:cover; background-position: center;"><h1><?PHP echo $name?></h1>
+                            </div></a>
                     <?PHP } ?>
                 </div>
             </div>

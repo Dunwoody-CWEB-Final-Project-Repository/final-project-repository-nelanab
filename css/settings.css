@@ -1,0 +1,62 @@
+.form-control{
+    background: #1D1D1D !important;
+    margin-bottom: 1.875rem;
+}
+
+#socials .form-control{
+    margin-bottom: 0;
+}
+
+#postContainer{
+    padding: 1.875rem !important;
+}
+
+form{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 10vw;
+}
+
+#imageInput{
+    width: 100%;
+}
+
+#userSettings{
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+#socials{
+    grid-column: 2 / 3;
+}
+
+
+#profilePic{
+    width: 7.8125vw;
+    height: 7.8125vw;
+    border-radius: 10px;
+}
+
+.btn-outline-danger{
+    margin-left: 0;
+}
+
+.social{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.875rem;
+}
+
+.social img{
+    width: 2.083333vw !important;
+    height: 2.083333vw !important;
+    margin-right: 10px;
+}
+
+.btn{
+    margin-top: 1.875rem;
+}
+
+
+

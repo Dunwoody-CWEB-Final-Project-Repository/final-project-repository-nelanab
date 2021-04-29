@@ -23,7 +23,7 @@
     <img src="img/post.png"/>
     <h2 class='navLink'>create post</h2>
   </a>
-  <a href="#" id="settings">
+  <a href="settings.php" id="settings">
     <img src="img/settings.png" alt="settings icon"/>
     <h2 class='navLink'>settings</h2>
   </a>

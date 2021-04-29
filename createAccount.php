@@ -81,7 +81,7 @@ if ( isset ($_POST[ 'signup' ])){
             }
     }
     else{
-        echo "<script>alert('Username already exists.')</script>";
+        echo "<script>alert('$username already exists. Please pick a different username!')</script>";
     }
     
     }
@@ -107,8 +107,15 @@ if ( isset ($_POST[ 'signup' ])){
         <link rel="stylesheet" href="css/overrides.css" />
         <link rel="stylesheet" href="css/login.css" />
         <link rel="icon" href="favicon.ico">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;800;900&display=swap" rel="stylesheet">
+        <script src="libs/bootstrap-4.0.0/js/tests/vendor/jquery-1.9.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="libs/bootbox.all.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="libs\bootstrap-4.0.0\dist\js\bootstrap.bundle.min.js"></script>
+        <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
         <style>
             .inputfile {
@@ -133,31 +140,40 @@ if ( isset ($_POST[ 'signup' ])){
         }
 
         </style>
-        
         <script>
+
+            const logo = document.querySelector('#logo');
+            const tooltip = document.querySelector('#tooltip');
+            Popper.createPopper(logo, tooltip, {
+                placement: 'right',
+            });
+
             function checkUsernameAvail() {
                 jQuery.ajax({
                     url: "check_availability.php",
                     data: 'username='+$('#username').val(),
                     type: "POST",
                     success: function(data){
-                        console.log("check ran");
+                        console.log("ran");
                     },
                     error: function(){
-
+                        console.log("Check username availabilty not working correctly.")
                     }
                 });
             }
-
-
-    </script>
+        </script>
+        
     </head>
 
     <body>
         <div id="container">
             <div id="login" class="align-self-center mx-auto d-block">
                 <div id="logoTitle">
-                    <img src="img/logo.png" alt="apple logo"/>
+                    <img src="img/logo.png" alt="apple logo" aria-describedby="tooltip" id="logo"/>
+                    <div id="tooltip" role="tooltip">
+                        Testing
+                        <div id="arrow" data-popper-arrow>
+                    </div>
                     <h1>reffle</h1>
                 </div>
                 
@@ -165,6 +181,8 @@ if ( isset ($_POST[ 'signup' ])){
                     <table>
                         <tr>
                             <input type='text' name='username' class='form-control' placeholder='username' onBlur="checkUsernameAvail()" id="username" required />
+                            </div>
+                            
                         </tr>
                         <tr>
                             <input type='password' name='password' class='form-control' id="password" placeholder='password' required />

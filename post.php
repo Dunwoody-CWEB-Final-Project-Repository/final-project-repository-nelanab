@@ -22,7 +22,7 @@
 
         $id=isset($_GET['id']) ? $_GET['id'] : die('ERROR:  Post not found :(');
 
-        $query = "SELECT p.title, p.description, i.image, u.username, f.name, u.profilePic, u.userID FROM posts p
+        $query = "SELECT p.title, p.description, i.image, u.username, f.name, u.profilePic, u.userID, f.folderID FROM posts p
         JOIN images i
         ON p.imageID = i.imageID
         JOIN users u 
@@ -48,6 +48,7 @@
 
         $profilePicture = htmlspecialchars($row['profilePic'], ENT_QUOTES);
         $userID = htmlspecialchars($row['userID'], ENT_QUOTES);
+        $folderID = htmlspecialchars($row['folderID'], ENT_QUOTES);
 ?>
 <!DOCTYPE html>
 <html>
@@ -66,6 +67,12 @@
         <link rel="stylesheet" href="css/create.css"/>
         <link rel="stylesheet" href="css/post.css"/>
         <link rel="icon" href="favicon.ico">
+        <script src="libs/bootstrap-4.0.0/js/tests/vendor/jquery-1.9.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="libs/bootbox.all.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     </head>
     
@@ -88,7 +95,7 @@
 
                 <div id="postInfo">
                     <h2 class="card-title"><?PHP echo $title; ?></h2>
-                    <h3 class="card-character"><?PHP echo $name; ?></h3>
+                    <a href="folderPosts.php?id=<?PHP echo $folderID?>"><h3 class="card-character"><?PHP echo $name; ?></h3></a>
                     <p class="card-text" style="font-weight: normal;"><?PHP echo $description; ?></p>
                     <div class='card-user align-self-end d-flex align-items-center'>
                         <a href="profile.php?id=<?php echo $userID?>"><img id="profilePic" src='uploads/<?PHP echo $profilePicture; ?>'/>
@@ -96,7 +103,7 @@
                         <?PHP 
                             if($userID == $loggedInID){
                                 echo "<a id='edit' href='edit.php'><img src='img/edit.png'/></a>";
-                                echo "<a id='delete' href='delete.php'><img src='img/Delete.png'/></a>";
+                                echo "<a id='delete' onclick='delete_post({$id});'><img src='img/Delete.png'/></a>";
                             }
                         ?>
                 </div>
@@ -104,6 +111,20 @@
         </div>
 
     </body>
+    <script type='text/javascript'>
+        function delete_post(id)
+		{
+			var answer = confirm("Are you sure?");
+			if(answer)
+			   {
+			   	// if user clicked ok, 
+				// pass the id to delete.php and execute the delete query 
+				   
+				   window.location = "delete.php?id="+id;
+			   }
+			
+		}
+    </script>
 </html>
 
 <?PHP } ?>

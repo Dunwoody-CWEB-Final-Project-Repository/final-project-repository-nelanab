@@ -20,30 +20,31 @@
 
         $id=isset($_GET['id']) ? $_GET['id'] : die('ERROR:  User not found :(');
 
-        $query = "SELECT profilePic, userID, username, bio, instagram, twitter, tumblr, linkedin, facebook FROM users u
-        WHERE userID = :userID;";
+        $query = "SELECT i.image, p.postID, f.name, u.username, f.userID FROM folders f 
+                    JOIN posts p 
+                    ON p.folderID = f.folderID
+                    JOIN images i
+                    ON p.imageID = i.imageID 
+                    JOIN users u
+                    ON f.userID = u.userID
+                    WHERE f.folderID = :folderID
+                    ORDER BY p.created DESC";
 
-        $stmt=$db->prepare($query);
-        $stmt->bindParam(':userID', $id);
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":folderID", $id);
         $stmt->execute();
 
         $row=$stmt->fetch(PDO::FETCH_ASSOC);
 
-        $profilePicture=htmlspecialchars($row['profilePic'], ENT_QUOTES);
+        $name=htmlspecialchars($row['name'], ENT_QUOTES);
+        $ownerUser=htmlspecialchars($row['username'], ENT_QUOTES);
         $userID=htmlspecialchars($row['userID'], ENT_QUOTES);
-        $user=htmlspecialchars($row['username'], ENT_QUOTES);
-        $bio=htmlspecialchars($row['bio'], ENT_QUOTES);
-        $instagram=htmlspecialchars($row['instagram'], ENT_QUOTES);
-        $twitter=htmlspecialchars($row['twitter'], ENT_QUOTES);
-        $tumblr=htmlspecialchars($row['tumblr'], ENT_QUOTES);
-        $facebook=htmlspecialchars($row['facebook'], ENT_QUOTES);
-        $linkedin=htmlspecialchars($row['linkedin'], ENT_QUOTES);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Reffle - <?php echo $username?></title>
+        <title>Reffle - <?php echo $name?></title>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" Content-Type: text/html; />
         <meta name="description" content="Reffle - Original Character Art Hosting">
@@ -65,7 +66,7 @@
     <body>
        <?PHP include 'navigation.php'; ?>
         <div id="container">
-            <h3 id="pageTitle"><?php echo $user;?></h3>
+            <h3 id="pageTitle"><a href="profile.php?id=<?PHP echo $userID ?>"><?php echo $ownerUser, "</a> / ", $name;?></h3>
             <form role="search" action="search.php" id="searchForm">
                 <div class="input-group">
                     <input type="text" class="search form-control" placeholder="search" name="s" id="search-term" required <?php echo isset($search_term) ? "value='$search_term'":""; ?> />
@@ -74,16 +75,15 @@
 
             <div id="postContainer">
                 <?PHP 
-                    $query = "SELECT i.image, postID FROM posts p
+                    $query = "SELECT i.image, p.postID, f.name FROM folders f 
+                    JOIN posts p 
+                    ON p.folderID = f.folderID
                     JOIN images i
-                    ON p.imageID = i.imageID
-                    JOIN users u
-                    ON p.userID = u.userID
-                    WHERE u.userID = :userID
+                    ON p.imageID = i.imageID 
+                    WHERE f.folderID = :folderID
                     ORDER BY p.created DESC";
-
                     $stmt = $db->prepare($query);
-                    $stmt->bindParam(":userID", $id);
+                    $stmt->bindParam(":folderID", $id);
                     $stmt->execute();
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                         extract($row);?>
