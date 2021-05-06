@@ -1,13 +1,11 @@
 <?PHP 
   $username = $_SESSION['userlogin'];
 
-  $nav = $db->prepare("SELECT profilePic, userID FROM users WHERE username=:username LIMIT 0,1");
-  $nav->bindParam(":username", $username);
-  $nav->execute();
-  $row = $nav->fetch(PDO::FETCH_ASSOC);
-
-  $profilePic = htmlspecialchars($row['profilePic'], ENT_QUOTES);
-  $loggedInID = htmlspecialchars($row['userID'], ENT_QUOTES);
+  $nav = "SELECT profilePic, userID FROM users WHERE username='$username' LIMIT 0,1";
+  foreach ($db->query($nav) as $row) {
+    $profilePic = htmlspecialchars($row['profilePic'], ENT_QUOTES);
+    $loggedInID = htmlspecialchars($row['userID'], ENT_QUOTES);
+  }
 ?>
 
 <div id="sidenav">

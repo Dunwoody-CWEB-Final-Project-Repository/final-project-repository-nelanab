@@ -58,8 +58,9 @@ span{
     color: #643045;
     font-weight: bold;
     padding: 5px 10px;
-    font-size: 13px;
+    font-size: .8vw;
     border-radius: 4px;
+    margin-left: .4vw !important;
   }
   
   #arrow,
@@ -94,4 +95,8 @@ span{
   
   #tooltip[data-popper-placement^='right'] > #arrow {
     left: -4px;
+  }
+
+  .modal-footer{
+    justify-content: center;
   }

@@ -220,3 +220,46 @@ label{
   align-items: center;
   margin-left: 1vw;
 }
+
+.modal-content {
+  background-color: #262626;
+  background-clip: padding-box;
+  border: 2px solid #262626;
+  border-radius: 10px;
+  outline: 0;
+  color: #F9F9F9;
+}
+
+.modal-body {
+  padding: 1.875rem;
+}
+
+.modal-footer {
+  padding: 1.875rem;
+  border-top: 2px solid #9fcb56;
+}
+
+.modal-footer button{
+  margin-bottom: 0 !important;
+}
+
+.modal-footer .btn{
+  width: 14.84375vw;
+  font-size: 1.25vw;
+}
+
+.modal-footer .btn-outline-danger{
+  margin-left: 0 !important;
+}
+
+.close{
+  color: #F9F9F9;
+  opacity: 1;
+  text-shadow: 0 0 0;
+  margin: 0 !important;
+  height: auto !important;
+}
+
+.modal-body button{
+  width: auto;
+}

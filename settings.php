@@ -10,7 +10,7 @@
 
         $username = $_SESSION['userlogin'];
 
-        $getIDQuery = 'SELECT userID, email, twitter, facebook, linkedin, tumblr, instagram, profilePic FROM users WHERE username=:username';
+        $getIDQuery = 'SELECT userID, email, twitter, facebook, linkedin, tumblr, instagram, profilePic, bio FROM users WHERE username=:username';
 
         $getID = $db->prepare($getIDQuery);
         $getID->bindParam(":username", $username);
@@ -26,11 +26,13 @@
         $loggedInInstagram = htmlspecialchars($usernameRow['instagram'], ENT_QUOTES);
         $loggedInLinkedIn = htmlspecialchars($usernameRow['linkedin'], ENT_QUOTES);
         $profilePic = htmlspecialchars($usernameRow['profilePic'], ENT_QUOTES);
+        $bio = htmlspecialchars($usernameRow['bio'], ENT_QUOTES);
 
         if ( isset ($_POST[ 'save' ])){
             try{
                 $newusername=htmlspecialchars(strip_tags($_POST['username']));
                 $email=htmlspecialchars(strip_tags($_POST['email']));
+                $newbio=htmlspecialchars(strip_tags($_POST['bio']));
 
                 if ($_FILES['image']['size'] == 0){
                     $image = $profilePic;
@@ -61,7 +63,7 @@
                     
                     if($password != ""){
                         $sql = "UPDATE users
-                                SET username=:username, password=:password, email=:email, twitter=:twitter, facebook=:facebook, linkedin=:linkedin, instagram=:instagram, tumblr=:tumblr, profilePic=:image
+                                SET username=:username, password=:password, email=:email, bio=:bio, twitter=:twitter, facebook=:facebook, linkedin=:linkedin, instagram=:instagram, tumblr=:tumblr, profilePic=:image
                                 WHERE userID = :userID";
             
                         $query = $db->prepare($sql);
@@ -74,6 +76,7 @@
                         if ($instagram != ""){$query->bindParam(":instagram", $instagram, PDO::PARAM_STR);}else{$query->bindValue(":instagram", NULL, PDO::PARAM_STR);}
                         if($facebook != ""){$query->bindParam(":facebook", $facebook, PDO::PARAM_STR);}else{$query->bindValue(":facebook", NULL, PDO::PARAM_STR);}
                         if($linkedin != ""){$query->bindParam(":linkedin", $linkedin, PDO::PARAM_STR);}else{$query->bindValue(":linkedin", NULL, PDO::PARAM_STR);}
+                        if($newbio != ""){$query->bindParam(":bio", $newbio, PDO::PARAM_STR);}else{$query->bindValue(":bio", NULL, PDO::PARAM_STR);}
                         $query->bindParam(":image", $image, PDO::PARAM_STR);
                         $query->bindParam(":userID", $loggedInID, PDO::PARAM_STR);
             
@@ -139,6 +142,7 @@
                         if ($instagram != ""){$query->bindParam(":instagram", $instagram, PDO::PARAM_STR);}else{$query->bindValue(":instagram", NULL, PDO::PARAM_STR);}
                         if($facebook != ""){$query->bindParam(":facebook", $facebook, PDO::PARAM_STR);}else{$query->bindValue(":facebook", NULL, PDO::PARAM_STR);}
                         if($linkedin != ""){$query->bindParam(":linkedin", $linkedin, PDO::PARAM_STR);}else{$query->bindValue(":linkedin", NULL, PDO::PARAM_STR);}
+                        if($newbio != ""){$query->bindParam(":bio", $newbio, PDO::PARAM_STR);}else{$query->bindValue(":bio", NULL, PDO::PARAM_STR);}
                         $query->bindParam(":image", $image, PDO::PARAM_STR);
                         $query->bindParam(":userID", $loggedInID, PDO::PARAM_STR);
             
@@ -269,7 +273,7 @@
             </form>
 
             <div id="postContainer">
-                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data">
+                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="post" enctype="multipart/form-data" id="settingsForm">
                     <div id="userSettings">
                         <h3>Change username:</h3>
                         <input type="text" name="username" placeholder="username" value="<?php echo $username ?>" class="form-control" required autocomplete="off"/>
@@ -280,12 +284,16 @@
                         <h3>Change email:</h3>
                         <input type="text" name="email" placeholder="<?php echo $loggedInEmail ?>" class="form-control" value="<?php echo $loggedInEmail ? : NULL; ?>"/>
 
+                        <h3>Change bio:</h3>
+                        <textarea name='bio' class='form-control' placeholder="<?php echo $bio ?>" value="<?php echo $bio ? : NULL; ?>" id="bio"><?php echo $bio ? : NULL; ?></textarea>
+
                         <img id="profilePic" src="uploads/<?php echo $profilePic;?>"/>
 
                         <div id="imageInput">
                             <input type="file" name="image" id="image" class="inputfile" onchange="readURL(this);" />
                             <label id="imgLabel" for="image" class='btn btn-outline-secondary'>change picture</label>
                         </div>
+                        
                     </div>
 
                     <div id="socials">

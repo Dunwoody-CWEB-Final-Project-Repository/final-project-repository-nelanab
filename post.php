@@ -53,7 +53,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Reffle - </title>
+        <title>Reffle - <?PHP echo $title ?> by <?PHP echo $postusername ?></title>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Type" Content-Type: text/html; />
         <meta name="description" content="Reffle - Original Character Art Hosting">
@@ -68,8 +68,6 @@
         <link rel="stylesheet" href="css/post.css"/>
         <link rel="icon" href="favicon.ico">
         <script src="libs/bootstrap-4.0.0/js/tests/vendor/jquery-1.9.1.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="libs/bootbox.all.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -103,7 +101,7 @@
                         <?PHP 
                             if($userID == $loggedInID){
                                 echo "<a id='edit' href='edit.php'><img src='img/edit.png'/></a>";
-                                echo "<a id='delete' onclick='delete_post({$id});'><img src='img/Delete.png'/></a>";
+                                echo "<a id='delete' style='cursor: pointer;' onclick='delete_post({$id});'><img src='img/Delete.png'/></a>";
                             }
                         ?>
                 </div>
@@ -114,14 +112,33 @@
     <script type='text/javascript'>
         function delete_post(id)
 		{
-			var answer = confirm("Are you sure?");
-			if(answer)
-			   {
-			   	// if user clicked ok, 
-				// pass the id to delete.php and execute the delete query 
-				   
-				   window.location = "delete.php?id="+id;
-			   }
+			bootbox.confirm({
+		    message: "<br><h4>Are you sure? This action cannot be undone.</h4>",
+		    buttons: {
+		        confirm: {
+		            label: 'Yes',
+		            className: 'btn-primary btn-sm'
+		        },
+		        cancel: {
+		            label: 'No',
+		            className: 'btn-outline-danger btn-sm'
+		        }
+		    },
+		    callback: function (result) {
+
+		        if(result==true){
+					$.post('delete.php', {
+						object_id: id
+					}, function(data){
+                        window.location = 'profile.php?id=<?PHP echo $loggedInID ?>';
+					}).fail(function() {
+						alert('Unable to delete.');
+					});
+		    	}
+			}
+		});
+
+		return false;
 			
 		}
     </script>

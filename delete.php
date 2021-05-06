@@ -8,56 +8,52 @@ if(strlen($_SESSION['userlogin']) == 0){
 }
 else{
     $username = $_SESSION['userlogin'];
+    if($_POST){
+        try{
+            $check = "SELECT userID FROM posts WHERE postID = ? LIMIT 1";
+            $checkSTMT=$db->prepare($check);
+            $checkSTMT->bindParam(1, $_POST['object_id']);
+            $checkSTMT->execute();
+            $checkrow=$checkSTMT->fetch(PDO::FETCH_ASSOC);
 
-    $getID = $db->prepare('SELECT userID FROM users WHERE username=:username',
-    array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false));
-    $getID->execute(array(':username' => $username) );
+            $userIDCheck = htmlspecialchars($checkrow['userID'], ENT_QUOTES);
 
-    while ($row = $getID->fetch(PDO::FETCH_ASSOC)){
-        $userID = $row['userID'];
-    }
+            $getIDQuery = 'SELECT userID FROM users WHERE username=:username';
 
-    $id=isset($_GET["id"]) ? $_GET["id"]:die("ERROR: Post not found.");
+            $getID = $db->prepare($getIDQuery);
+            $getID->bindParam(":username", $username);
+            $getID->execute();
 
-    try{
-        
-        
+            $usernameRow = $getID->fetch(PDO::FETCH_ASSOC);
 
-        $check = "SELECT userID FROM posts WHERE postID = ? LIMIT 1";
-        $checkSTMT=$db->prepare($check);
-        $checkSTMT->bindParam(1, $id);
-        $checkSTMT->execute();
-        $checkrow=$checkSTMT->fetch(PDO::FETCH_ASSOC);
+            $loggedInID = htmlspecialchars($usernameRow['userID'], ENT_QUOTES);
 
-        $userIDCheck = htmlspecialchars($checkrow['userID'], ENT_QUOTES);
+            if ($loggedInID == $userIDCheck){
+        // delete query
+                $query="DELETE FROM posts WHERE postID= ? ";
+                $stmt=$db->prepare($query);
+                $stmt->bindParam(1, $_POST['object_id']);
 
-        if ($userID == $userIDCheck){
-    // delete query
-            $query="DELETE FROM posts WHERE postID= ? ";
-            $stmt=$db->prepare($query);
-            $stmt->bindParam(1,$id);
-
-            if ($stmt->execute())
-            {   
-                header("Location: home.php");
+                if ($stmt->execute())
+                {   
+                }
+                else
+                {
+                    die("Unable to delete record.");
+                }	
             }
-            else
-            {
-                die("Unable to delete record.");
-            }	
+            else{
+                echo "This post does not belong to you!";
+                echo "<br>";
+                echo "<a href='home.php'>Return to homepage</a>";
+            }
         }
-        else{
-            echo "This post does not belong to you!";
-            echo "<br>";
-            echo "<a href='home.php'>Return to homepage</a>";
-        }
-    }
-        
+            
 
-    catch(PDOException $exception)
-    {
-        die("ERROR :".$exception->getMessage());
+        catch(PDOException $exception)
+        {
+            die("ERROR :".$exception->getMessage());
+        }
     }
-        
 }
 ?>

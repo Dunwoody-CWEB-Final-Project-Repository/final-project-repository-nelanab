@@ -2,6 +2,7 @@
 
 include 'config/core.php';
 include 'config/database.php';
+include 'check_availability.php';
 
 if ( isset ($_POST[ 'signup' ])){
     try{
@@ -141,20 +142,23 @@ if ( isset ($_POST[ 'signup' ])){
 
         </style>
         <script>
-
-            const logo = document.querySelector('#logo');
-            const tooltip = document.querySelector('#tooltip');
-            Popper.createPopper(logo, tooltip, {
-                placement: 'right',
-            });
-
             function checkUsernameAvail() {
                 jQuery.ajax({
                     url: "check_availability.php",
                     data: 'username='+$('#username').val(),
                     type: "POST",
                     success: function(data){
-                        console.log("ran");
+                        console.log(data);
+                        if (data.length > 0){
+                            const logo = document.querySelector('#username');
+                            const tooltip = document.querySelector('#tooltip');
+                            const content = document.querySelector('#content');
+                            tooltip.style.display = "block";
+                            content.innerHTML = data;
+                            Popper.createPopper(logo, tooltip, {
+                                placement: 'right',
+                            });
+                        }
                     },
                     error: function(){
                         console.log("Check username availabilty not working correctly.")
@@ -170,25 +174,27 @@ if ( isset ($_POST[ 'signup' ])){
             <div id="login" class="align-self-center mx-auto d-block">
                 <div id="logoTitle">
                     <img src="img/logo.png" alt="apple logo" aria-describedby="tooltip" id="logo"/>
-                    <div id="tooltip" role="tooltip">
-                        Testing
-                        <div id="arrow" data-popper-arrow>
-                    </div>
+                    
                     <h1>reffle</h1>
                 </div>
                 
-                <form action='' method="post" enctype="multipart/form-data">
+                <form action='' method="post" enctype="multipart/form-data" autocomplete="off">
                     <table>
                         <tr>
-                            <input type='text' name='username' class='form-control' placeholder='username' onBlur="checkUsernameAvail()" id="username" required />
-                            </div>
+                            <div id="tooltip" role="tooltip" style="display: none;">
+                            <span id="content"></span>
+                                <div id="arrow" data-popper-arrow>
+                                
+                                </div>
+                            </div> 
+                            <input type='text' name='username' class='form-control' placeholder='username' onBlur="checkUsernameAvail()" id="username" autocomplete="off" required />
                             
                         </tr>
                         <tr>
-                            <input type='password' name='password' class='form-control' id="password" placeholder='password' required />
+                            <input type='password' name='password' class='form-control' id="password" placeholder='password' autocomplete="new-password" required />
                         </tr>
                         <tr>
-                            <input type='email' name='email' class='form-control' placeholder='email' required/>
+                            <input type='email' name='email' class='form-control' placeholder='email' autocomplete="off" required/>
                         </tr>
                         <tr>
                         <input type="file" name="image" id="image" class="inputfile" />

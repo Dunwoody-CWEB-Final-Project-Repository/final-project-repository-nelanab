@@ -10,11 +10,11 @@
     else{
         $username = $_SESSION['userlogin'];
 
-        $getID = $db->prepare('SELECT userID FROM users WHERE username=:username');
-        $getID->execute(array(':username' => $username) );
-        while ($row = $getID->fetch(PDO::FETCH_ASSOC)){
+        $getID = "SELECT userID FROM users WHERE username='$username' LIMIT 0,1";
+        foreach ($db->query($getID) as $row) {
             $userID = $row['userID'];
         }
+
     if ($_POST){
         try{
             
@@ -85,7 +85,7 @@
     
                     if(empty($file_upload_error_messages)){
                         if(move_uploaded_file($_FILES["image"]["tmp_name"],$target_file)){
-    
+                            echo "<scriipt>window.location = 'profile.php?id='" . $userID . "';</script>;";
                         }
                         else{
                             echo"<script>alert('Unable to upload photo.')</script>";
@@ -95,11 +95,13 @@
                         echo "<script>alert('{$file_upload_error_messages}')</script>";
                     }
                 }
-                
+               echo "<script>window.location('home.php')</script>";
             }
             else{
-                echo "<script>alert('Unable to create account. Please try again.')</script>";
+                echo "<script>alert('Unable to create post. Please try again.')</script>";
             }
+            $stmt->closeCursor();
+            header('Location: profile.php?id=' . $userID . '');
         }
         catch(PDOException $exception){
             die('Error: ' . $exception->getMessage());
@@ -176,19 +178,15 @@
                     <div id="postInfo">
                         <table>
                             <tr>
-                                <input type='text' name='title' class='form-control' placeholder='title' required />
+                                <input type='text' name='title' class='form-control' placeholder='title' required autocomplete="off"/>
                             </tr>
                             <tr>
                                 <select class='form-control' name='folderID'>
                                     <option value="" disabled selected hidden>select folder</option>
                                     <option>
                                         <?php
-                                        $stmt = $db->prepare('SELECT folderID, name FROM folders WHERE userID = :userID ORDER BY name',
-        array(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false));
-                                        $stmt->bindParam(":userID", $userID);
-                                        $stmt->execute();
-
-                                            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                                            $getFolders = "SELECT folderID, name FROM folders WHERE userID='$userID' ORDER BY name";
+                                            foreach ($db->query($getFolders) as $row) {
                                                 extract($row);
                                                 echo "<option value='{$folderID}'>{$name}</option>";
                                             }

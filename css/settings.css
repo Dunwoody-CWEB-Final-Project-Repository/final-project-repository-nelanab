@@ -11,7 +11,7 @@
     padding: 1.875rem !important;
 }
 
-form{
+#settingsForm{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -58,5 +58,7 @@ form{
     margin-top: 1.875rem;
 }
 
-
+#bio{
+    height: 6em;
+}
 

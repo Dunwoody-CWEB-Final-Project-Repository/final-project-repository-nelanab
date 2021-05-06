@@ -93,6 +93,8 @@
             else{
                 echo "<script>alert('Unable to create account. Please try again.')</script>";
             }
+            $stmt->closeCursor();
+            header('Location: profile.php?id=' . $userID . '');
         }
         catch(PDOException $exception){
             die('Error: ' . $exception->getMessage());
@@ -173,7 +175,7 @@
                             </tr>
                             <tr id="confirmBtns">
                                 <a href="profile.php?id=<?PHP echo $userID?>">
-                                <input type='submit' value='create post' class='btn btn-primary button' /></a>
+                                <input type='submit' value='create folder' class='btn btn-primary button' /></a>
                                 <a href="profile.php?id=<?PHP echo $userID?>">
                                 <div class='btn btn-outline-danger button'>discard</div></a>
                             </tr>
