@@ -37,67 +37,68 @@
                     <input type="text" class="search form-control" placeholder="&#9906; search" name="s" id="search-term" required <?php echo isset($search_term) ? "value='$search_term'":""; ?> />
                 </div>
             </form>
-            <h2>Posts</h2>
-            <div id="posts">
-            <?PHP 
-                $postQuery = "SELECT i.image, title, f.name, p.postID FROM posts p JOIN folders f ON f.folderID = p.folderID JOIN images i ON i.imageID = p.imageID WHERE title LIKE :title
-                OR description LIKE :description 
-                OR f.name LIKE :name;
-                ORDER BY p.created DESC";
+            <div id="postContainer">
+                <h2>Posts</h2>
+                <div id="posts">
+                <?PHP 
+                    $postQuery = "SELECT i.image, title, f.name, p.postID FROM posts p JOIN folders f ON f.folderID = p.folderID JOIN images i ON i.imageID = p.imageID WHERE title LIKE :title
+                    OR description LIKE :description 
+                    OR f.name LIKE :name;
+                    ORDER BY p.created DESC";
 
-                $stmt = $db-> prepare($postQuery);
+                    $stmt = $db-> prepare($postQuery);
 
-                $search_term_for_query = "%{$search_term}%";
-                $stmt->bindParam(':name', $search_term_for_query);
-                $stmt->bindParam(':title', $search_term_for_query);
-                $stmt->bindParam(':description', $search_term_for_query);
+                    $search_term_for_query = "%{$search_term}%";
+                    $stmt->bindParam(':name', $search_term_for_query);
+                    $stmt->bindParam(':title', $search_term_for_query);
+                    $stmt->bindParam(':description', $search_term_for_query);
 
-                $stmt->execute();
+                    $stmt->execute();
 
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                    extract($row);?>
-                    <a href="post.php?id=<?PHP echo $postID; ?>"><div class="post" style="background-image:url('uploads/<?PHP echo $image;?>'); background-size:cover; background-position: center;">
-                        </div></a>
-                <?PHP } ?>
-            </div>
-            <h2>Folders</h2>
-            <div id="folders">
-            <?PHP
-                $folderQuery = "SELECT i.image, f.name, f.userID, f.folderID FROM folders f JOIN images i ON f.imageID = i.imageID
-                WHERE f.name LIKE :name;";
-
-                $stmt = $db-> prepare($folderQuery);
-
-                $search_term_for_query = "%{$search_term}%";
-                $stmt->bindParam(':name', $search_term_for_query);
-
-                $stmt->execute();
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                    extract($row);?>
-                    <a href="folderPosts.php?id=<?PHP echo $folderID?>"><div class="folder" style="background-image:url('uploads/<?PHP echo $image?>'); background-size:cover; background-position: center;"><h1><?PHP echo $name?></h1>
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                        extract($row);?>
+                        <a href="post.php?id=<?PHP echo $postID; ?>"><div class="post" style="background-image:url('uploads/<?PHP echo $image;?>'); background-size:cover; background-position: center;">
                             </div></a>
-                <?PHP } ?>
-            </div>
-            <h2>Users</h2>
-            <div id="users">
-            <?PHP
-                $usersQuery = "SELECT userID, username, profilePic FROM users
-                WHERE username LIKE :username;
-                ORDER BY u.created DESC";
+                    <?PHP } ?>
+                </div>
+                <h2>Folders</h2>
+                <div id="folders">
+                <?PHP
+                    $folderQuery = "SELECT i.image, f.name, f.userID, f.folderID FROM folders f JOIN images i ON f.imageID = i.imageID
+                    WHERE f.name LIKE :name;";
 
-                $stmt = $db-> prepare($usersQuery);
+                    $stmt = $db-> prepare($folderQuery);
 
-                $search_term_for_query = "%{$search_term}%";
-                $stmt->bindParam(':username', $search_term_for_query);
+                    $search_term_for_query = "%{$search_term}%";
+                    $stmt->bindParam(':name', $search_term_for_query);
 
-                $stmt->execute();
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-                    extract($row);?>
-                    <a href="profile.php?id=<?PHP echo $userID?>"><div class="folder" style="background-image:url('uploads/<?PHP echo $profilePic?>'); background-size:cover; background-position: center;"><h1><?PHP echo $username?></h1>
+                    $stmt->execute();
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                        extract($row);?>
+                        <a href="folderPosts.php?id=<?PHP echo $folderID?>"><div class="folder" style="background-image:url('uploads/<?PHP echo $image?>'); background-size:cover; background-position: center;"><h1><?PHP echo $name?></h1>
+                                </div></a>
+                    <?PHP } ?>
+                </div>
+                <h2>Users</h2>
+                <div id="users">
+                    <?PHP
+                        $usersQuery = "SELECT userID, username, profilePic FROM users
+                        WHERE username LIKE :username;
+                        ORDER BY u.created DESC";
+
+                        $stmt = $db-> prepare($usersQuery);
+
+                        $search_term_for_query = "%{$search_term}%";
+                        $stmt->bindParam(':username', $search_term_for_query);
+
+                        $stmt->execute();
+                        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+                            extract($row);?>
+                            <a href="profile.php?id=<?PHP echo $userID?>"><div class="folder" style="background-image:url('uploads/<?PHP echo $profilePic?>'); background-size:cover; background-position: center;"><h1><?PHP echo $username?></h1>
                             </div></a>
-                <?PHP } ?>
+                    <?PHP } ?>
+                </div>
             </div>
-
         </div>
     </body>
 </html>

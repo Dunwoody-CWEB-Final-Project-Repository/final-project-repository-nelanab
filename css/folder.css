@@ -5,3 +5,12 @@
     grid-auto-flow: row dense;
     gap: 1.5625vw;
 }
+
+.btn-outline-danger{
+    margin-left: 0 !important;
+    margin-right: 2vw;
+}
+
+#searchForm{
+    display: flex;
+}

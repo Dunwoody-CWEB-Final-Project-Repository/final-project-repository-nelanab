@@ -188,8 +188,7 @@
                                     echo "<script>alert('{$file_upload_error_messages}')</script>";
                                 }
                             }
-                            $_SESSION['userlogin']=$_POST['username'];
-                            echo "<script type='text/javascript'> document.location = 'settings.php'; </script>";
+                            echo "<script type='text/javascript'> document.location = 'logout.php'; </script>";
                         }
                         else{
                         echo "<script>alert('Unable to update account. Please try again.')</script>";
@@ -279,21 +278,22 @@
                         <input type="text" name="username" placeholder="username" value="<?php echo $username ?>" class="form-control" required autocomplete="off"/>
 
                         <h3>Change password:</h3>
-                        <input type="password" name="password" placeholder="password" class="form-control" value="" />
+                        <input type="password" name="password" placeholder="password" class="form-control" value="" required />
 
                         <h3>Change email:</h3>
                         <input type="text" name="email" placeholder="<?php echo $loggedInEmail ?>" class="form-control" value="<?php echo $loggedInEmail ? : NULL; ?>"/>
 
                         <h3>Change bio:</h3>
-                        <textarea name='bio' class='form-control' placeholder="<?php echo $bio ?>" value="<?php echo $bio ? : NULL; ?>" id="bio"><?php echo $bio ? : NULL; ?></textarea>
+                        <textarea name='bio' class='form-control' placeholder="bio" value="<?php echo $bio ? : NULL; ?>" id="bio"><?php echo $bio ? : NULL; ?></textarea>
+                    </div>
 
+                    <div id="profileChange">
                         <img id="profilePic" src="uploads/<?php echo $profilePic;?>"/>
 
                         <div id="imageInput">
                             <input type="file" name="image" id="image" class="inputfile" onchange="readURL(this);" />
                             <label id="imgLabel" for="image" class='btn btn-outline-secondary'>change picture</label>
                         </div>
-                        
                     </div>
 
                     <div id="socials">
@@ -322,13 +322,14 @@
                             <input type="text" class="form-control" name="linkedin" placeholder="<?php echo $loggedInLinkedIn ? : 'linkedin'; ?>" value="<?php echo $loggedInLinkedIn ? : NULL; ?>"/>
                         </span>
                         
-                        <span id="buttons">
-                            <input type='submit' value='save changes' class='btn btn-primary button' name="save"/>
-
-                            <div class='btn btn-outline-danger button' onclick="location.reload();">discard changes</div>
-                        </span>
+                        
                     </div>
+                    
+                    <span id="buttons">
+                        <input type='submit' value='save changes' class='btn btn-primary button' name="save"/>
 
+                        <div class='btn btn-outline-danger button' onclick="location.reload();">discard changes</div>
+                    </span>
                     
 
                 </form>

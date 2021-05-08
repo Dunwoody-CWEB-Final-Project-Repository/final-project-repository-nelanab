@@ -42,10 +42,11 @@ span{
     align-items: center;
 }
 
-#logoTitle img{
+#logo{
     width: 3.75vw !important;
     height: 3.75vw !important;
     margin-bottom: 1.2em;
+    background-image: url('../img/apple.svg');
 }
 
 .btn{

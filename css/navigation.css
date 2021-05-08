@@ -31,10 +31,28 @@
     color: #9FCB56 !important;
 }
 
-a img{
+.image{
     width: 3.75vw !important;
     height: 3.75vw !important;
     border-radius: 10px;
+}
+
+#logo{
+    background-image: url('../img/apple.svg');
+    background-size:contain;
+    background-position: center;
+}
+
+#settingsimg{
+    background-image: url('../img/settings.svg');
+    background-size:contain;
+    background-position: center;
+}
+
+#create{
+    background-image: url('../img/penduo.svg');
+    background-size:contain;
+    background-position: center;
 }
 
 #sidenav a{

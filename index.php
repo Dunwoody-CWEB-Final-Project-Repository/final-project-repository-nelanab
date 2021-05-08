@@ -83,7 +83,7 @@
         <div id="container">
             <div id="login" class="align-self-center mx-auto d-block">
                 <div id="logoTitle">
-                    <img src="img/logo.png" alt="apple logo"/>
+                    <div id="logo" class="image"></div>
                     <h1>reffle</h1>
                 </div>
                 

@@ -67,15 +67,29 @@
        <?PHP include 'navigation.php'; ?>
         <div id="container">
             <h3 id="pageTitle"><a href="profile.php?id=<?PHP echo $userID ?>"><?php echo $ownerUser, "</a> / ", $name;?></h3>
-            <form role="search" action="search.php" id="searchForm">
+            
+            <form role="search" action="search.php" id="searchForm"><?PHP 
+                    $getUserIDFolder = "SELECT userID FROM folders WHERE folderID = :folderID";
+                    $getfIdStmt = $db->prepare($getUserIDFolder);
+                    $getfIdStmt->bindParam(":folderID", $id);
+                    $getfIdStmt->execute();
+                    $idRow = $getfIdStmt->fetch(PDO::FETCH_ASSOC);
+                    $folderUserID = htmlspecialchars($idRow['userID']);
+
+                    if ($folderUserID == $userID){
+                        echo "<a href='deleteFolder.php?id={$id}' class='btn btn-outline-danger'>delete folder</a>";
+                    }
+
+            ?>
                 <div class="input-group">
                     <input type="text" class="search form-control" placeholder="search" name="s" id="search-term" required <?php echo isset($search_term) ? "value='$search_term'":""; ?> />
                 </div>
             </form>
-
+            
             <div id="postContainer">
                 <?PHP 
-                    $query = "SELECT i.image, p.postID, f.name FROM folders f 
+
+                    $query = "SELECT i.image, p.postID, f.name, f.folderID, f.userID FROM folders f 
                     JOIN posts p 
                     ON p.folderID = f.folderID
                     JOIN images i
@@ -85,6 +99,7 @@
                     $stmt = $db->prepare($query);
                     $stmt->bindParam(":folderID", $id);
                     $stmt->execute();
+
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                         extract($row);?>
                         

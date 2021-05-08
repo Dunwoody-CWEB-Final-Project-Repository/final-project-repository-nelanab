@@ -263,3 +263,8 @@ label{
 .modal-body button{
   width: auto;
 }
+
+.btn{
+  width: 14.84375vw;
+  font-size: 1.25vw;
+}

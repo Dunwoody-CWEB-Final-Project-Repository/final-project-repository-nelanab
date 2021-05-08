@@ -6,15 +6,26 @@
     gap: 1.5625vw;
 }
 
-#users{
+#users, #posts, #folders{
     justify-content: space-between;
-    height: 50vh;
+    height: auto;
+    max-height: 60vh;
     gap: 1.5625vw;
     overflow-y: auto;
     align-content: space-between;
     padding-right: 1.5625vw;
+    overflow-y: auto;
+    margin-bottom: 1.875rem;
 }
 
 #container{
     overflow-y: auto;
+}
+
+#postContainer{
+    display: block;
+}
+
+h2{
+    margin-bottom: 1vh !important;
 }

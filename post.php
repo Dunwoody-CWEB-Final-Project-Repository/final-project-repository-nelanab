@@ -100,7 +100,7 @@
                         <h3 class="card-username"><?PHP echo $postusername; ?></h3></a>
                         <?PHP 
                             if($userID == $loggedInID){
-                                echo "<a id='edit' href='edit.php'><img src='img/edit.png'/></a>";
+                                echo "<a id='edit' href='edit.php?id={$id}'><img src='img/edit.png'/></a>";
                                 echo "<a id='delete' style='cursor: pointer;' onclick='delete_post({$id});'><img src='img/Delete.png'/></a>";
                             }
                         ?>

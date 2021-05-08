@@ -38,6 +38,9 @@
 
     <body>
         <div id="container">
+            <a href="logout.php" id="logout">
+                <button class='btn btn-outline-danger button'>logout</button>
+            </a>
             <nav id="navigation">
             <h2 id="usersNav"><a style="color: #9FCB56" href="home.php">Users</a></h2> 
                 <h2 id="postsNav" ><a href="posts.php">Posts</a></h2>
