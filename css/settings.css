@@ -3,12 +3,12 @@
     margin-bottom: 1.875rem;
 }
 
-#socials .form-control{
-    margin-bottom: 0;
-}
-
 #postContainer{
     padding: 1.875rem !important;
+}
+
+#socials .form-control{
+    margin-bottom: 0;
 }
 
 #settingsForm{
@@ -68,5 +68,52 @@
 
 #bio{
     height: 6em;
+}
+
+@media only screen and (max-width: 500px){
+    .form-control, .btn {
+        margin-bottom: 2.59vh;
+    }
+
+    #postContainer{
+        padding: 2.59vh;
+    }
+
+    #userSettings, #profileChange, #socials, #buttons{
+        grid-column: 1 / 5;
+    }
+
+    #profileChange, #imageInput{
+        position: relative;
+    }
+
+    #profileChange{
+        display: flex;
+        margin-bottom: 2.59vh;
+    }
+
+    #imgLabel{
+        margin: 0;
+        width: auto;
+        font-size: 4.8vw;
+        margin-left: 2.59vh;
+    }
+
+    #profilePic{
+        width: 13.4vh;
+        height: 13.4vh;
+    }
+
+    .btn{
+        margin-top: 0;
+        width: auto;
+        max-width: 50vw;
+        font-size: 4.8vw !important;
+    }
+
+    .social img{
+        width: 8vw !important;
+        height: 8vw !important;
+    }
 }
 

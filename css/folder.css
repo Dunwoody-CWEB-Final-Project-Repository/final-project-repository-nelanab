@@ -14,3 +14,11 @@
 #searchForm{
     display: flex;
 }
+
+@media only screen and (max-width: 500px){
+    #postContainer {
+        grid-template-columns: repeat(2, 1fr) !important;
+        grid-auto-rows: 22vh;
+        gap: 2.59vh;
+    }
+}

@@ -9,10 +9,6 @@
     z-index: 9999999999 !important;
 }
 
-#sidenav:hover{
-    left: 0;
-}
-
 #sidenav .navLink{
     position: relative;
     margin-left: 1.875rem;
@@ -20,15 +16,7 @@
     transition: all .3s ease-in-out;
     width: 0;
     overflow:hidden;
-}
-
-#sidenav:hover .navLink{
-    opacity: 100%;
-    width: auto;
-}
-
-#sidenav a:hover{
-    color: #9FCB56 !important;
+    height: 0;
 }
 
 .image{
@@ -101,13 +89,84 @@ h1{
     height: auto !important;
 }
 
-#sidenav:hover #logout{
-    opacity: 100%;
-    width: 24vw;
+
+
+#hamburger{
+    display:none;
 }
 
-#sidenav:hover .button{
-    left: 20px !important;
-    width: 14.884375vw !important;
+@media only screen and (min-width: 500px){
+    #sidenav:hover{
+        left: 0;
+    }
+
+    #sidenav:hover #logout{
+        opacity: 100%;
+        width: 24vw;
+    }
+
+    #sidenav:hover .button{
+        left: 20px !important;
+        width: 14.884375vw !important;
+    }
+    
+    #sidenav:hover .navLink{
+        opacity: 100%;
+        width: auto;
+        height: auto;
+    }
+
+    #sidenav a:hover{
+        color: #9FCB56 !important;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    #sidenav{
+        width: 90vw;
+        left: -90vw;
+    }
+
+    #sidenav a{
+        left: -87.8125vw;
+        height: auto;
+    }
+
+    #hamburger{
+        display: flex;
+        left: 2.59vh;
+        background-image: url('../img/hamburger.svg');
+        background-size:contain;
+        background-position: center;
+        position: fixed;
+        border-radius: 0;
+        top: 2.59vh;
+        z-index: 99999999999999 !important;
+    }
+
+    #closeHam{
+        background-image: url('../img/x.svg');
+        background-size:contain;
+        background-position: center;
+        border-radius: 0;
+        top: 2.59vh;
+        left: 77.91vw;
+        position: relative;
+    }
+    
+    .image{
+        width: 14.4vw !important;
+        height: 14.4vw !important;
+    }
+
+    .ham{
+        width: 6vw;
+        height: 6vw;
+    }
+
+    #sidenav h2, #sidenav h1{
+        font-size: 8.4vw !important;
+    }
 }
 

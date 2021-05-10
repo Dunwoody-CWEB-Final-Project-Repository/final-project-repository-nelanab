@@ -38,3 +38,58 @@
     margin-left: auto;
     margin-right: 1.5vw;
 }
+
+@media only screen and (max-width: 500px){
+    .card-title{
+        font-size: 4.6vw;
+        margin-bottom: .5rem;
+    }
+
+    #postContainer{
+        padding: 0 !important;
+        display: block;
+    }
+
+    #imgUpload{
+        width: 100%;
+        height: 60%;
+    }
+
+    #postInfo{
+        width: 100%;
+        height: 40%;
+        padding: 2.59vh;
+    }
+
+    .card-block{
+        padding: 2.59vh !important;
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .card-text{
+        height: 70% !important;
+        margin-bottom: 2.59vh !important;
+        overflow-y: auto;
+        width: 77vw;
+        word-wrap: break-word;
+    }
+
+    .card-user{
+        height: auto;
+    }
+
+    #profilePic, .card-user #delete img, .card-user #edit img{
+        width: 10vw !important;
+        height: 10vw !important;
+    }
+
+    .card{
+        height: 60vh;
+    }
+
+    .card-user h3, .card-user .h3{
+        margin-bottom: 0 !important;
+        margin-left: 2.59vh;
+    }
+}

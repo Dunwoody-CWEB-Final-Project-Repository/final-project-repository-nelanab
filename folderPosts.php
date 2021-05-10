@@ -58,9 +58,11 @@
         <link rel="stylesheet" href="css/profile.css" />
         <link rel="stylesheet" href="css/folder.css" />
         <link rel="icon" href="favicon.ico">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="libs/bootstrap-4.0.0/js/tests/vendor/jquery-1.9.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        <script src="libs/bootbox.all.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-        <meta http-equiv="Cache-control" content="no-cache">
     </head>
     
     <body>
@@ -77,7 +79,7 @@
                     $folderUserID = htmlspecialchars($idRow['userID']);
 
                     if ($folderUserID == $userID){
-                        echo "<a href='deleteFolder.php?id={$id}' class='btn btn-outline-danger'>delete folder</a>";
+                        echo "<a href='#' onclick='delete_folder({$id})' class='btn btn-outline-danger'>delete folder</a>";
                     }
 
             ?>
@@ -110,7 +112,39 @@
         </div>
 
     </body>
-    
+    <script type='text/javascript'>
+        function delete_folder(id)
+		{
+			bootbox.confirm({
+		    message: "<br><h4>Are you sure? Deleting this folder will also delete all the posts that belong to it. This action cannot be undone.</h4>",
+		    buttons: {
+		        confirm: {
+		            label: 'Yes',
+		            className: 'btn-primary btn-sm'
+		        },
+		        cancel: {
+		            label: 'No',
+		            className: 'btn-outline-danger btn-sm'
+		        }
+		    },
+		    callback: function (result) {
+
+		        if(result==true){
+					$.post('deleteFolder.php', {
+						object_id: id
+					}, function(data){
+                        window.location = 'profile.php?id=<?PHP echo $loggedInID ?>';
+					}).fail(function() {
+						alert('Unable to delete.');
+					});
+		    	}
+			}
+		});
+
+		return false;
+			
+		}
+    </script>
 </html>
 
 <?PHP } ?>

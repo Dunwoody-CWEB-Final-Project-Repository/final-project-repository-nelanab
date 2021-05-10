@@ -101,3 +101,36 @@ span{
   .modal-footer{
     justify-content: center;
   }
+
+  @media only screen and (max-width: 500px){
+    #login{
+      width: 80%;
+    }
+
+    #logoTitle{
+      width: 80%;
+    }
+
+    #logoTitle h1{
+      margin-top: .6em;
+      margin-left: .5em;
+      font-size: 9.6vw;
+    }
+
+    #logo {
+      width: 9.6vw !important;
+      height: 9.6vw !important;
+      margin-bottom: 0;
+    }
+
+    .btn{
+      width: 100% !important;
+      font-size: 4.8vw;
+    }
+
+    #container {
+      width: 93.75%;
+      height: 93.75%;
+    }
+
+  }

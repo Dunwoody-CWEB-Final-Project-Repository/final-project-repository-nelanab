@@ -1,5 +1,22 @@
 body{
-    font-family: 'Nunito', sans-serif;
+  font-family: 'Nunito', sans-serif;
+  width: 100vw;
+  height: 100vh;
+  font-size: .833333vw;
+  background-color: #1D1D1D;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+  padding-left: 1.875rem;
+  padding-right: 1.875rem;
+  position: relative;
+  display: grid;
+  color: #F9F9F9;
+  overflow: hidden;
+  word-wrap: break-word !important;
+}
+
+::placeholder{
+  font-size: 1.25vw !important;
 }
 
 ::-webkit-scrollbar {
@@ -267,4 +284,38 @@ label{
 .btn{
   width: 14.84375vw;
   font-size: 1.25vw;
+}
+
+@media only screen and (max-width: 500px){
+  body{
+    padding-left: 2.59vh !important;
+    padding-right: 2.59vh !important;
+    font-size: 3.2vw !important;
+  }
+
+  #container{
+    grid-column: 1 / span 12 !important;
+  }
+
+  h3, p{
+    font-size: 4.6vw !important;
+  }
+
+  .form-control{
+    font-size: 4.6vw !important;
+  }
+
+  #postContainer{
+    padding: 2.59vh !important;
+  }
+
+  #pageTitle{
+    margin-bottom: 1.39vh !important;
+    margin-top: 60px !important;
+  }
+
+  #searchForm{
+    width: 35vw !important;
+    font-size: 4.6vw !important;
+  }
 }

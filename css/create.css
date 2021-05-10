@@ -2,7 +2,7 @@ body{
     font-size: .833333vw;
 }
 #postContainer{
-    padding: 0;
+    padding: 0 !important;
     display: flex;
     flex-wrap: nowrap;
 }
@@ -66,4 +66,40 @@ button{
 #imgLabel, #file{
     position: absolute;
     z-index: 1;
+}
+
+@media only screen and (max-width: 500px){
+    #postForm{
+        display: block !important;
+    }
+
+    #imgUpload{
+        height: 50% !important;
+        width: 100%;
+    }
+
+    #description {
+        height: 32% !important;
+    }
+
+    #postInfo .form-control {
+        margin-bottom: 2.59vh;
+    }
+
+    #postInfo .btn{
+        width: 35vw;
+        max-width: 60vw;
+        font-size: 4.8vw;
+    }
+
+    #postInfo{
+        width: 100%;
+        padding: 2.59vh;
+        height: 50%;
+    }
+
+    #imgLabel{
+        width: 40vw;
+        font-size: 4.8vw;
+    }
 }
