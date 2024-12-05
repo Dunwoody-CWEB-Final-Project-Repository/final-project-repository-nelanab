@@ -1,0 +1,119 @@
+.form-control{
+    background: #1D1D1D !important;
+    margin-bottom: 1.875rem;
+}
+
+#postContainer{
+    padding: 1.875rem !important;
+}
+
+#socials .form-control{
+    margin-bottom: 0;
+}
+
+#settingsForm{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 5vw;
+}
+
+#imageInput{
+    width: 100%;
+}
+
+#userSettings{
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+#socials{
+    grid-column: 3 / 4;
+}
+
+#profileChange{
+    grid-column: 2 / 3;
+}
+
+#buttons{
+    grid-column: 4 / 5;
+}
+
+
+#profilePic{
+    width: 7.8125vw;
+    height: 7.8125vw;
+    border-radius: 10px;
+}
+
+.btn-outline-danger{
+    margin-left: 0;
+}
+
+.social{
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.875rem;
+}
+
+.social img{
+    width: 2.083333vw !important;
+    height: 2.083333vw !important;
+    margin-right: 10px;
+}
+
+.btn{
+    margin-top: 1.875rem;
+}
+
+#bio{
+    height: 6em;
+}
+
+@media only screen and (max-width: 500px){
+    .form-control, .btn {
+        margin-bottom: 2.59vh;
+    }
+
+    #postContainer{
+        padding: 2.59vh;
+    }
+
+    #userSettings, #profileChange, #socials, #buttons{
+        grid-column: 1 / 5;
+    }
+
+    #profileChange, #imageInput{
+        position: relative;
+    }
+
+    #profileChange{
+        display: flex;
+        margin-bottom: 2.59vh;
+    }
+
+    #imgLabel{
+        margin: 0;
+        width: auto;
+        font-size: 4.8vw;
+        margin-left: 2.59vh;
+    }
+
+    #profilePic{
+        width: 13.4vh;
+        height: 13.4vh;
+    }
+
+    .btn{
+        margin-top: 0;
+        width: auto;
+        max-width: 50vw;
+        font-size: 4.8vw !important;
+    }
+
+    .social img{
+        width: 8vw !important;
+        height: 8vw !important;
+    }
+}
+

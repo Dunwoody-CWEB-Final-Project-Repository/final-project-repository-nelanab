@@ -1,0 +1,24 @@
+#postContainer{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr) !important;
+    grid-auto-rows: 13.28125vw;
+    grid-auto-flow: row dense;
+    gap: 1.5625vw;
+}
+
+.btn-outline-danger{
+    margin-left: 0 !important;
+    margin-right: 2vw;
+}
+
+#searchForm{
+    display: flex;
+}
+
+@media only screen and (max-width: 500px){
+    #postContainer {
+        grid-template-columns: repeat(2, 1fr) !important;
+        grid-auto-rows: 22vh;
+        gap: 2.59vh;
+    }
+}

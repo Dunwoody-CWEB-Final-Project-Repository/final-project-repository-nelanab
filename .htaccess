@@ -1,0 +1,9 @@
+Options +FollowSymLinks
+RewriteEngine on
+RewriteRule profile/id/(.*)/ profile.php?id=$1
+RewriteRule profile/id/(.*) profile.php?id=$1	
+RewriteRule post/id/(.*)/ post.php?id=$1
+RewriteRule post/id/(.*) post.php?id=$1	
+RewriteRule folder/id/(.*)/ folder.php?id=$1
+RewriteRule folder/id/(.*) folder.php?id=$1	
+RewriteRule settings/ settings.php
